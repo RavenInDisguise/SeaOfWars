@@ -6,11 +6,17 @@
 package seaswar;
 
 import Cliente.Cliente;
+import Command.CommandManager;
+import Command.CrearPersonajeCommand;
+import Command.ICommand;
+import Logica.Jugador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,7 +27,8 @@ import javax.swing.JOptionPane;
  * @author Jennifer
  */
 public class SeasWarPantalla extends javax.swing.JFrame {
-
+    Jugador jugadorActual=new Jugador(); //NO PUEDE QUEDARSE ASI, TIENE QUE SETEAR EL JUGADOR. 
+    CommandManager manager = CommandManager.getIntance();
     /**
      * Creates new form f
      */
@@ -31,7 +38,6 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         int color2 = 40;
         int color3 = 20;
         convertMatrixToGUI(color1, color2, color3);
-      initComponents();
     }
     Cliente refCliente;
     
@@ -151,10 +157,10 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txtArea_Escribir = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtArea_Command = new javax.swing.JTextArea();
+        btn_Instrucciones = new javax.swing.JButton();
         btn_Enviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 153, 153));
         setResizable(false);
 
@@ -249,6 +255,13 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txtArea_Command.setSelectionColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(txtArea_Command);
 
+        btn_Instrucciones.setText("Instrucciones");
+        btn_Instrucciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InstruccionesActionPerformed(evt);
+            }
+        });
+
         btn_Enviar.setText("Enviar");
         btn_Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,8 +285,10 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane2)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Instrucciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Enviar)
                 .addContainerGap())
         );
@@ -295,31 +310,30 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Enviar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Instrucciones)
+                        .addComponent(btn_Enviar)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_InstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InstruccionesActionPerformed
+        String commandName=txtArea_Escribir.getText();    
+        ICommand command=manager.getCommand(commandName);   
+        command.mostrarPantalla(txtArea_Command);
+        txtArea_Escribir.setText("");
+    }//GEN-LAST:event_btn_InstruccionesActionPerformed
+
     private void btn_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarActionPerformed
         // TODO add your handling code here:
-        /* 
-        try {
-            // TODO add your handling code here:
-
-            if (txtField.getText().trim().equals(""))
-                JOptionPane.showMessageDialog(this, "Sin mensaje para enviar");
-            else{
-            
-                refCliente.hiloCliente.writer.writeInt(2);
-                refCliente.hiloCliente.writer.writeUTF(txtField.getText());
-                txtField.setText("");
-            }
-        } catch (IOException ex) {
-            
-        }
-        */
+        String datosTxt=txtArea_Escribir.getText();
+        String[] datos= datosTxt.split("-");
+        String commandName=datos[0];    
+        ICommand command=manager.getCommand(commandName);   
+        command.execute(datos,txtArea_Command,jugadorActual);
+        txtArea_Escribir.setText("");
     }//GEN-LAST:event_btn_EnviarActionPerformed
 
     /**
@@ -361,6 +375,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Enviar;
+    private javax.swing.JButton btn_Instrucciones;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

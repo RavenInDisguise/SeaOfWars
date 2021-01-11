@@ -47,12 +47,7 @@ public class ThreadCliente extends Thread{
                         refPantalla.addMensaje(usuario1+": " + mensaje);
                     break;
                     case 3: // pasan un mensaje por el chat
-                        String usuario2 = reader.readUTF();
-                        int valorDados = reader.readInt();
-                        //System.out.println("CLIENTE Recibido mensaje: " + mensaje);
-                        refPantalla.addMensaje("");
-                       // refPantalla.btnEnviar.setBackground(Color.red);
-                        //refPantalla.btnEnviar.setText("Dados: " + valorDados);
+                        
                     case 4:
                        String usuario3 = reader.readUTF();
                        //refPantalla.addUser(usuario3);
