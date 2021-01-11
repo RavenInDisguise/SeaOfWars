@@ -24,7 +24,6 @@ public class CrearPersonajeCommand extends BaseCommand {
                                 + "Ingrese su porcentaje de resistencia: \n"
                                 + "Ingrese su porcentaje de sanidad: \n"
                                 + "Ingrese el url de su imagen: \n"
-                
                                 + "TODO ESTO EN ORDEN Y DIVIDIDO POR * SIN ESPACIOS \n");
     }
     @Override

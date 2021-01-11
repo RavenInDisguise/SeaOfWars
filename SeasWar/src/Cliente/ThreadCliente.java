@@ -50,7 +50,7 @@ public class ThreadCliente extends Thread{
                         String usuario2 = reader.readUTF();
                         int valorDados = reader.readInt();
                         //System.out.println("CLIENTE Recibido mensaje: " + mensaje);
-                        refPantalla.addMensaje("El usuario " + usuario2 + " saco un " + valorDados);
+                        refPantalla.addMensaje("");
                        // refPantalla.btnEnviar.setBackground(Color.red);
                         //refPantalla.btnEnviar.setText("Dados: " + valorDados);
                     case 4:
