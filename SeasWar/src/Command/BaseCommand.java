@@ -15,7 +15,9 @@ public abstract class BaseCommand implements ICommand {
     @Override       
     public abstract String getCommandName();       
       
-    public abstract void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador);       
+    public abstract void execute(String[] datos, JTextArea txtArea_Command, Jugador jugador);   
+    
+    public abstract void mostrarPantalla(JTextArea txtArea_Command);
     
     public void write(String message) {           
         try {   

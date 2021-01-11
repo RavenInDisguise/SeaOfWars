@@ -19,8 +19,13 @@ public class ErrorCommand extends BaseCommand {
     }       
     
     @Override
-    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador) {
+    public void execute(String[] datos, JTextArea txtArea_Command, Jugador jugador) {
         txtArea_Command.append("El comando escrito presenta un error. Intente de nuevo."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mostrarPantalla(JTextArea txtArea_Command) {
+        txtArea_Command.append("*****************************");
     }
 }
 
