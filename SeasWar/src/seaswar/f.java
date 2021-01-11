@@ -132,7 +132,9 @@ public class f extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtArea_Escribir = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtArea_Command = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -208,16 +210,27 @@ public class f extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTextArea1.setBackground(new java.awt.Color(0, 153, 153));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Adobe Jenson Pro Lt Capt", 1, 18)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTextArea1.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        jTextArea1.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTextArea1);
+        txtArea_Escribir.setBackground(new java.awt.Color(0, 153, 153));
+        txtArea_Escribir.setColumns(20);
+        txtArea_Escribir.setFont(new java.awt.Font("Adobe Jenson Pro Lt Capt", 1, 18)); // NOI18N
+        txtArea_Escribir.setForeground(new java.awt.Color(255, 255, 255));
+        txtArea_Escribir.setRows(5);
+        txtArea_Escribir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtArea_Escribir.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtArea_Escribir.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtArea_Escribir.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(txtArea_Escribir);
+
+        txtArea_Command.setBackground(new java.awt.Color(0, 153, 153));
+        txtArea_Command.setColumns(20);
+        txtArea_Command.setFont(new java.awt.Font("Adobe Jenson Pro Lt Capt", 1, 18)); // NOI18N
+        txtArea_Command.setForeground(new java.awt.Color(255, 255, 255));
+        txtArea_Command.setRows(5);
+        txtArea_Command.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtArea_Command.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtArea_Command.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtArea_Command.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(txtArea_Command);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -233,6 +246,7 @@ public class f extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane2)
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -248,8 +262,11 @@ public class f extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -297,7 +314,9 @@ public class f extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelMatriz;
+    private javax.swing.JTextArea txtArea_Command;
+    private javax.swing.JTextArea txtArea_Escribir;
     // End of variables declaration//GEN-END:variables
 }
