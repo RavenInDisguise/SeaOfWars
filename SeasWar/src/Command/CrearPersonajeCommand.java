@@ -23,6 +23,8 @@ public class CrearPersonajeCommand extends BaseCommand {
                                 + "Ingrese su porcentaje de poder: \n"
                                 + "Ingrese su porcentaje de resistencia: \n"
                                 + "Ingrese su porcentaje de sanidad: \n"
+                                + "Ingrese el url de su imagen: \n"
+                
                                 + "TODO ESTO EN ORDEN Y DIVIDIDO POR * SIN ESPACIOS \n");
     }
     @Override
@@ -38,7 +40,7 @@ public class CrearPersonajeCommand extends BaseCommand {
         int resistenciaLuchador; 4
         int SanidadLuchador; 5
         */
-        Luchador luchadorNuevo = new Luchador(datos[0],datos[1],Integer. parseInt(datos[2]),Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]));
+        Luchador luchadorNuevo = new Luchador(datos[0],datos[1],Integer. parseInt(datos[2]),Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]),datos[6]);
         jugador.agregarLuchador(luchadorNuevo);
     }       
     @Override           
