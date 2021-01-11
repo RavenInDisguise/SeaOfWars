@@ -15,15 +15,17 @@ public class Luchador {
     int porcentajeCivilizacion;
     int poderLuchador;
     int resistenciaLuchador;
-    int SanidadLuchador;   
+    int SanidadLuchador;  
+    String urlImagen;
 
-    public Luchador(String nombreLuchador, String Grupo, int porcentajeCivilizacion, int poderLuchador, int resistenciaLuchador, int SanidadLuchador) {
+    public Luchador(String nombreLuchador, String Grupo, int porcentajeCivilizacion, int poderLuchador, int resistenciaLuchador, int SanidadLuchador, String url) {
         this.nombreLuchador = nombreLuchador;
         this.Grupo = Grupo;
         this.porcentajeCivilizacion = porcentajeCivilizacion;
         this.poderLuchador = poderLuchador;
         this.resistenciaLuchador = resistenciaLuchador;
         this.SanidadLuchador = SanidadLuchador;
+        this.urlImagen=url;
     }
     
 }
