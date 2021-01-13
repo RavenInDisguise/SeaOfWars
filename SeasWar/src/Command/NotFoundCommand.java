@@ -9,29 +9,16 @@ import Logica.Jugador;
 import java.awt.TextArea;
 import java.io.OutputStream;
 import javax.swing.JTextArea;
-import seaswar.SeasWarPantalla;
 
 public class NotFoundCommand extends BaseCommand {       
-    private static final String COMMAND_NAME = "NOT_FOUND";       
+    private static final String COMMAND_NAME = "NOT FOUND";       
     
-    @Override       
-    public String getCommandName() {           
+    @Override       public String getCommandName() {           
         return COMMAND_NAME;   
-    }   
+    }       
 
-    /**
-     *
-     * @param datos
-     * @param txtArea_Command
-     * @param jugador
-     */
     @Override
-    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {
-        pantalla.txtArea_Command.append("El comando escrito no existe. Intente de nuevo.");//To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public void mostrarPantalla(SeasWarPantalla pantalla) {
-        pantalla.txtArea_Command.append("*****************************");
+    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador) {
+        txtArea_Command.append("El comando escrito no existe. Intente de nuevo.");//To change body of generated methods, choose Tools | Templates.
     }
 }

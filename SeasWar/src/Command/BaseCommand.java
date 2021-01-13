@@ -9,16 +9,13 @@ import Logica.Jugador;
 import java.awt.TextArea;
 import java.io.OutputStream;
 import javax.swing.JTextArea;
-import seaswar.SeasWarPantalla;
 
 public abstract class BaseCommand implements ICommand {       
     
     @Override       
     public abstract String getCommandName();       
       
-    public abstract void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador);   
-    
-    public abstract void mostrarPantalla(SeasWarPantalla pantalla);
+    public abstract void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador);       
     
     public void write(String message) {           
         try {   
