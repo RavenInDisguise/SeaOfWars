@@ -9,8 +9,10 @@ import Logica.Jugador;
 import java.awt.TextArea;
 import java.io.OutputStream;
 import javax.swing.JTextArea;
+import seaswar.SeasWarPantalla;
 
 public interface ICommand {       
     public String getCommandName();       
-    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador); 
+    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador); 
+    public void mostrarPantalla(SeasWarPantalla pantalla);
 }

@@ -11,36 +11,33 @@ import java.awt.TextArea;
 import java.io.OutputStream;
 import java.util.Arrays;
 import javax.swing.JTextArea;
+import seaswar.SeasWarPantalla;
 
 public class CrearPersonajeCommand extends BaseCommand {       
-    public static final String COMMAN_NAME = "CREAR PERSONAJE";       
+    public static final String COMMAN_NAME = "CREAR_PERSONAJE";       
     
     
-    public void mostrarPantalla(JTextArea txtArea_Command){
-        txtArea_Command.append("Ingrese un nombre: \n"
+    public void mostrarPantalla(SeasWarPantalla pantalla){
+        pantalla.txtArea_Command.append("Ingrese un nombre: \n"
                                 + "Ingrese un grupo entre (Manta Negra, Poseidon y Aquaman: \n"
                                 + "Ingrese el porcentaje que representa para la civilizacion: \n"
                                 + "Ingrese su porcentaje de poder: \n"
                                 + "Ingrese su porcentaje de resistencia: \n"
                                 + "Ingrese su porcentaje de sanidad: \n"
                                 + "Ingrese el url de su imagen: \n"
-                
-                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR * SIN ESPACIOS \n");
+                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n");
     }
     @Override
-    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador) {      
-        String datosTxt=txtArea_Escribir.getText();
-        String[] datos= datosTxt.split("*");
-        
+    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {      
         /*
-        String nombreLuchador; 0
-        String Grupo; 1
-        int porcentajeCivilizacion; 2
-        int poderLuchador; 3
-        int resistenciaLuchador; 4
-        int SanidadLuchador; 5
+        String nombreLuchador; 1
+        String Grupo; 2
+        int porcentajeCivilizacion; 3
+        int poderLuchador; 4
+        int resistenciaLuchador; 5
+        int SanidadLuchador; 6
         */
-        Luchador luchadorNuevo = new Luchador(datos[0],datos[1],Integer. parseInt(datos[2]),Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]),datos[6]);
+        Luchador luchadorNuevo = new Luchador(datos[1],datos[2],Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]),Integer. parseInt(datos[6]),datos[7]);
         jugador.agregarLuchador(luchadorNuevo);
     }       
     @Override           

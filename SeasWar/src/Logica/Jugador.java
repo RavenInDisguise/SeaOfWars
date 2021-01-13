@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author monic
  */
 public class Jugador {
+    String nombreUsuario;
     ArrayList<Luchador> luchadores=new ArrayList<>();
     
     public void agregarLuchador(Luchador luchador){
