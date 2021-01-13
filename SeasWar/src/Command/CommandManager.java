@@ -14,7 +14,6 @@ public class CommandManager {
     
     private CommandManager() {           
         registCommand(CrearPersonajeCommand.COMMAN_NAME, CrearPersonajeCommand.class);
-        registCommand(ReadyCommand.COMMAN_NAME, ReadyCommand.class);
     }       
     
     public static synchronized CommandManager getIntance() {           

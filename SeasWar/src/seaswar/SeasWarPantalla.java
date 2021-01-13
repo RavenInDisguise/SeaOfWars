@@ -6,38 +6,22 @@
 package seaswar;
 
 import Cliente.Cliente;
-import Command.CommandManager;
-import Command.CrearPersonajeCommand;
-import Command.ICommand;
-import Logica.Jugador;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jennifer
+ * @author monic
  */
 public class SeasWarPantalla extends javax.swing.JFrame {
-    Jugador jugadorActual=new Jugador(); //NO PUEDE QUEDARSE ASI, TIENE QUE SETEAR EL JUGADOR. 
-    CommandManager manager = CommandManager.getIntance();
-    Cliente refCliente;
+
     /**
-     * Creates new form f
+     * Creates new form SeasWarPantalla
      */
     public SeasWarPantalla() {
         initComponents();
-        convertMatrixToGUI(50, 30, 20);
     }
-    
+    Cliente refCliente;
     
 
     public void setRefCliente(Cliente refCliente) {
@@ -47,97 +31,13 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     
     public void addMensaje(String msj)
     {
-        txtArea_Command.append(msj + "\n");
+        txtArea.append(msj + "\n");
     }  
-    
-    public void convertMatrixToGUI(int color1, int color2, int color3) {
-    int cantidad1 = (color1*600)/100; //GRIS - 180
-    int cantidad2 = (color2*600)/100; //AZUL - 240
-    int cantidad3 = (color3*600)/100; //VERDE - 180
-    int cont1 = 0;
-    int cont2 = 0;
-    int cont3 = 0;
-    
-    String [][]matrix = new String[21][31];
-    JButton [][]butt = new JButton[21][31];
-    JLabel [][]lbl = new JLabel[21][31];
-    
-    
-    panelMatriz.setLayout(new GridLayout(21, 31));
-    
+    /**
+     * Creates new form ClientForm
+     */
+  
 
-    for(int r=0; r<=20; r++){
-        for(int c=0; c<=30; ){
-            Font fuente = new Font("Calibri", 3, 4);
-            butt[r][c] = new JButton(matrix[r][c]);
-            butt[r][c].setSize(25, 25);
-            butt[r][c].setFont(fuente);
-            if (r==0 && c==0){
-                lbl[r][c] = new JLabel(matrix[r][c]);
-                lbl[r][c].setSize(25, 25);
-                lbl[r][c].setBackground(Color.WHITE);
-                panelMatriz.add(lbl[r][c]);
-                c++;
-            }
-            else if (r==0){
-                lbl[r][c] = new JLabel(matrix[r][c]);
-                lbl[r][c].setSize(25, 25);
-                lbl[r][c].setBackground(Color.WHITE);
-                lbl[r][c].setText(""+c);
-                panelMatriz.add(lbl[r][c]);
-                c++;
-            }
-            else if (c==0){
-                lbl[r][c] = new JLabel(matrix[r][c]);
-                lbl[r][c].setSize(25, 25);
-                lbl[r][c].setBackground(Color.WHITE);
-                lbl[r][c].setText(""+r);
-                panelMatriz.add(lbl[r][c]);
-                c++;
-            }else{
-                int caso = (int) (Math.random() * 3) + 1;
-                switch (caso) {
-                    case 1:
-                        if (cont1<cantidad1){
-                            butt[r][c].setBackground(Color.LIGHT_GRAY);
-                            panelMatriz.add(butt[r][c]);
-                            cont1+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
-                    case 2:
-                        if (cont2<cantidad2){
-                            butt[r][c].setBackground(Color.BLUE);
-                            panelMatriz.add(butt[r][c]);
-                            cont2+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
-                    default:
-                        if (cont3<cantidad3){
-                            butt[r][c].setBackground(Color.GREEN);
-                            panelMatriz.add(butt[r][c]);
-                            cont3+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
-                        
-                }
-            }
-        }
-    }
-    
-    pack();
-    setVisible(true);
-    
-   
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,124 +48,34 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelMatriz = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panel_Fondo = new javax.swing.JPanel();
+        panel_Juego = new javax.swing.JPanel();
+        panel_Chat = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtArea_Escribir = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtArea_Command = new javax.swing.JTextArea();
-        btn_Instrucciones = new javax.swing.JButton();
+        txtArea = new javax.swing.JTextArea();
         btn_Enviar = new javax.swing.JButton();
+        txtField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 153, 153));
-        setMaximumSize(new java.awt.Dimension(1328, 810));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1328, 810));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelMatriz.setBackground(new java.awt.Color(255, 255, 255));
+        panel_Fondo.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout panelMatrizLayout = new javax.swing.GroupLayout(panelMatriz);
-        panelMatriz.setLayout(panelMatrizLayout);
-        panelMatrizLayout.setHorizontalGroup(
-            panelMatrizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 775, Short.MAX_VALUE)
+        javax.swing.GroupLayout panel_JuegoLayout = new javax.swing.GroupLayout(panel_Juego);
+        panel_Juego.setLayout(panel_JuegoLayout);
+        panel_JuegoLayout.setHorizontalGroup(
+            panel_JuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
-        panelMatrizLayout.setVerticalGroup(
-            panelMatrizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+        panel_JuegoLayout.setVerticalGroup(
+            panel_JuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel2.setPreferredSize(new java.awt.Dimension(775, 105));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 773, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 137, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel3.setPreferredSize(new java.awt.Dimension(247, 329));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
-        );
-
-        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel4.setPreferredSize(new java.awt.Dimension(247, 331));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
-        );
-
-        txtArea_Escribir.setBackground(new java.awt.Color(0, 153, 153));
-        txtArea_Escribir.setColumns(20);
-        txtArea_Escribir.setFont(new java.awt.Font("Adobe Jenson Pro Lt Capt", 1, 18)); // NOI18N
-        txtArea_Escribir.setForeground(new java.awt.Color(255, 255, 255));
-        txtArea_Escribir.setRows(5);
-        txtArea_Escribir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        txtArea_Escribir.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtArea_Escribir.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtArea_Escribir.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(txtArea_Escribir);
-
-        txtArea_Command.setBackground(new java.awt.Color(0, 153, 153));
-        txtArea_Command.setColumns(20);
-        txtArea_Command.setFont(new java.awt.Font("Adobe Jenson Pro Lt Capt", 1, 18)); // NOI18N
-        txtArea_Command.setForeground(new java.awt.Color(255, 255, 255));
-        txtArea_Command.setRows(5);
-        txtArea_Command.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        txtArea_Command.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtArea_Command.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtArea_Command.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(txtArea_Command);
-
-        btn_Instrucciones.setText("Instrucciones");
-        btn_Instrucciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_InstruccionesActionPerformed(evt);
-            }
-        });
+        txtArea.setEditable(false);
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
         btn_Enviar.setText("Enviar");
         btn_Enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,75 +84,75 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane2)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1137, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panel_ChatLayout = new javax.swing.GroupLayout(panel_Chat);
+        panel_Chat.setLayout(panel_ChatLayout);
+        panel_ChatLayout.setHorizontalGroup(
+            panel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(panel_ChatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Instrucciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Enviar)
+                .addGap(51, 51, 51))
+        );
+        panel_ChatLayout.setVerticalGroup(
+            panel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ChatLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_Enviar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtField))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(343, 343, 343))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panelMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_Instrucciones)
-                        .addComponent(btn_Enviar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+
+        javax.swing.GroupLayout panel_FondoLayout = new javax.swing.GroupLayout(panel_Fondo);
+        panel_Fondo.setLayout(panel_FondoLayout);
+        panel_FondoLayout.setHorizontalGroup(
+            panel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_FondoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(panel_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_FondoLayout.createSequentialGroup()
+                .addContainerGap(288, Short.MAX_VALUE)
+                .addComponent(panel_Juego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(245, 245, 245))
         );
+        panel_FondoLayout.setVerticalGroup(
+            panel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_FondoLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(panel_Juego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(panel_Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_InstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InstruccionesActionPerformed
-        String commandName=txtArea_Escribir.getText();    
-        ICommand command=manager.getCommand(commandName);   
-        command.mostrarPantalla(this);
-        txtArea_Escribir.setText("");
-    }//GEN-LAST:event_btn_InstruccionesActionPerformed
-
     private void btn_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarActionPerformed
         // TODO add your handling code here:
-        String datosTxt=txtArea_Escribir.getText();
-        String[] datos= datosTxt.split("-");
-        String commandName=datos[0];    
-        ICommand command=manager.getCommand(commandName);   
-        command.execute(datos,this,jugadorActual);
-        txtArea_Escribir.setText("");
+        try {
+            // TODO add your handling code here:
+
+            if (txtField.getText().trim().equals(""))
+                JOptionPane.showMessageDialog(this, "Sin mensaje para enviar");
+            else{
+            
+                refCliente.hiloCliente.writer.writeInt(2);
+                refCliente.hiloCliente.writer.writeUTF(txtField.getText());
+                txtField.setText("");
+            }
+        } catch (IOException ex) {
+            
+        }
+        
+        
     }//GEN-LAST:event_btn_EnviarActionPerformed
 
     /**
@@ -371,28 +181,22 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SeasWarPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SeasWarPantalla().setVisible(true);
-                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btn_Enviar;
-    public javax.swing.JButton btn_Instrucciones;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JPanel panelMatriz;
-    public javax.swing.JTextArea txtArea_Command;
-    public javax.swing.JTextArea txtArea_Escribir;
+    private javax.swing.JButton btn_Enviar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panel_Chat;
+    private javax.swing.JPanel panel_Fondo;
+    private javax.swing.JPanel panel_Juego;
+    private javax.swing.JTextArea txtArea;
+    private javax.swing.JTextField txtField;
     // End of variables declaration//GEN-END:variables
 }

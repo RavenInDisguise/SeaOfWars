@@ -52,9 +52,18 @@ class ThreadServidor extends Thread{
                             current.writer.writeUTF(nombre);
                             current.writer.writeUTF(mensaje);
                         }
+                        
                     break;
                     case 3:
+                        int primero = (new Random()).nextInt(6) + 1;
+                        int segundo = (new Random()).nextInt(6) + 1;
                         
+                        for (int i = 0; i < server.conexiones.size(); i++) {
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(3);
+                            current.writer.writeUTF(nombre);
+                            current.writer.writeInt(primero + segundo);
+                        }
                         
                     break;
                     
