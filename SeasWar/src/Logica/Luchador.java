@@ -27,6 +27,63 @@ public class Luchador {
         this.SanidadLuchador = SanidadLuchador;
         this.urlImagen=url;
     }
+
+    public String getNombreLuchador() {
+        return nombreLuchador;
+    }
+
+    public void setNombreLuchador(String nombreLuchador) {
+        this.nombreLuchador = nombreLuchador;
+    }
+
+    public String getGrupo() {
+        return Grupo;
+    }
+
+    public void setGrupo(String Grupo) {
+        this.Grupo = Grupo;
+    }
+
+    public int getPorcentajeCivilizacion() {
+        return porcentajeCivilizacion;
+    }
+
+    public void setPorcentajeCivilizacion(int porcentajeCivilizacion) {
+        this.porcentajeCivilizacion = porcentajeCivilizacion;
+    }
+
+    public int getPoderLuchador() {
+        return poderLuchador;
+    }
+
+    public void setPoderLuchador(int poderLuchador) {
+        this.poderLuchador = poderLuchador;
+    }
+
+    public int getResistenciaLuchador() {
+        return resistenciaLuchador;
+    }
+
+    public void setResistenciaLuchador(int resistenciaLuchador) {
+        this.resistenciaLuchador = resistenciaLuchador;
+    }
+
+    public int getSanidadLuchador() {
+        return SanidadLuchador;
+    }
+
+    public void setSanidadLuchador(int SanidadLuchador) {
+        this.SanidadLuchador = SanidadLuchador;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+    
     
 }
 

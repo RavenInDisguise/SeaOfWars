@@ -18,4 +18,24 @@ public class Jugador {
     public void agregarLuchador(Luchador luchador){
         luchadores.add(luchador);
     }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public ArrayList<Luchador> getLuchadores() {
+        return luchadores;
+    }
+
+    public void setLuchadores(ArrayList<Luchador> luchadores) {
+        this.luchadores = luchadores;
+    }
+    
+    public int getSizeLuchadores(){
+        return luchadores.size();
+    }
 }
