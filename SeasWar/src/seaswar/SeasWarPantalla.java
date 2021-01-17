@@ -10,6 +10,8 @@ import Command.CommandManager;
 import Command.CrearPersonajeCommand;
 import Command.ICommand;
 import Logica.Jugador;
+import Logica.Casilla;
+import Logica.Luchador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -29,17 +31,14 @@ import javax.swing.JOptionPane;
 public class SeasWarPantalla extends javax.swing.JFrame {
     Jugador jugadorActual=new Jugador(); //NO PUEDE QUEDARSE ASI, TIENE QUE SETEAR EL JUGADOR. 
     CommandManager manager = CommandManager.getIntance();
+    Cliente refCliente;
     /**
      * Creates new form f
      */
     public SeasWarPantalla() {
         initComponents();
-        int color1 = 40;
-        int color2 = 40;
-        int color3 = 20;
-        convertMatrixToGUI(color1, color2, color3);
     }
-    Cliente refCliente;
+    
     
 
     public void setRefCliente(Cliente refCliente) {
@@ -52,7 +51,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txtArea_Command.append(msj + "\n");
     }  
     
-    public void convertMatrixToGUI(int color1, int color2, int color3) {
+    public void convertMatrixToGUI(Jugador jugadorActual, int color1, Luchador luchador1, int color2, Luchador luchador2, int color3, Luchador luchador3) {
     int cantidad1 = (color1*600)/100; //GRIS - 180
     int cantidad2 = (color2*600)/100; //AZUL - 240
     int cantidad3 = (color3*600)/100; //VERDE - 180
@@ -61,6 +60,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     int cont3 = 0;
     
     String [][]matrix = new String[21][31];
+    Casilla [][]casillas = new Casilla[21][31];
     JButton [][]butt = new JButton[21][31];
     JLabel [][]lbl = new JLabel[21][31];
     
@@ -74,6 +74,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             butt[r][c] = new JButton(matrix[r][c]);
             butt[r][c].setPreferredSize(new Dimension(25, 25));
             butt[r][c].setFont(fuente);
+            casillas[r][c] = new Casilla("","blanco",null,butt[r][c],r,c);
             if (r==0 && c==0){
                 lbl[r][c] = new JLabel(matrix[r][c]);
                 lbl[r][c].setPreferredSize(new Dimension(25, 25));
@@ -101,7 +102,9 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 switch (caso) {
                     case 1:
                         if (cont1<cantidad1){
-                            butt[r][c].setBackground(Color.LIGHT_GRAY);
+                            butt[r][c].setBackground(Color.LIGHT_GRAY); //String historialAtaques, Luchador luchadorRepresentado, Button refBoton, int x, int y
+                            casillas[r][c].setLuchadorRepresentado(luchador1);
+                            casillas[r][c].setColor("gris");
                             panelMatriz.add(butt[r][c]);
                             cont1+=1;
                             c++;
@@ -112,6 +115,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     case 2:
                         if (cont2<cantidad2){
                             butt[r][c].setBackground(Color.BLUE);
+                            casillas[r][c].setLuchadorRepresentado(luchador2);
+                            casillas[r][c].setColor("azul");
                             panelMatriz.add(butt[r][c]);
                             cont2+=1;
                             c++;
@@ -122,6 +127,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     default:
                         if (cont3<cantidad3){
                             butt[r][c].setBackground(Color.GREEN);
+                            casillas[r][c].setLuchadorRepresentado(luchador3);
+                            casillas[r][c].setColor("verde");
                             panelMatriz.add(butt[r][c]);
                             cont3+=1;
                             c++;
@@ -134,8 +141,16 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             }
         }
     }
-
     
+    pack();
+    setVisible(true);
+    jugadorActual.setMatrizCasillas(casillas);
+    /*
+    for(int r=0; r < casillas.length; r++){
+        for(int c=0; c<casillas[r].length; c++){
+            System.out.println(casillas[r][c].getColor()+" - X: "+casillas[r][c].getX()+" - Y: "+casillas[r][c].getY());
+        }
+    }*/
    
 }
 
@@ -163,8 +178,10 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
         setResizable(false);
+        setSize(new java.awt.Dimension(1328, 810));
 
         panelMatriz.setBackground(new java.awt.Color(255, 255, 255));
+        panelMatriz.setPreferredSize(new java.awt.Dimension(775, 521));
 
         javax.swing.GroupLayout panelMatrizLayout = new javax.swing.GroupLayout(panelMatriz);
         panelMatriz.setLayout(panelMatrizLayout);
@@ -174,7 +191,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         );
         panelMatrizLayout.setVerticalGroup(
             panelMatrizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -193,20 +210,22 @@ public class SeasWarPantalla extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel2.setPreferredSize(new java.awt.Dimension(775, 105));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 773, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 137, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel3.setPreferredSize(new java.awt.Dimension(247, 329));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -216,21 +235,22 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 327, Short.MAX_VALUE)
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel4.setPreferredSize(new java.awt.Dimension(247, 331));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 245, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 329, Short.MAX_VALUE)
         );
 
         txtArea_Escribir.setBackground(new java.awt.Color(0, 153, 153));
@@ -273,14 +293,14 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane2)
@@ -295,26 +315,32 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(343, 343, 343))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(panelMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_Instrucciones)
-                        .addComponent(btn_Enviar)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addComponent(btn_Enviar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
+
+        panelMatriz.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,7 +348,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     private void btn_InstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InstruccionesActionPerformed
         String commandName=txtArea_Escribir.getText();    
         ICommand command=manager.getCommand(commandName);   
-        command.mostrarPantalla(txtArea_Command);
+        command.mostrarPantalla(this);
         txtArea_Escribir.setText("");
     }//GEN-LAST:event_btn_InstruccionesActionPerformed
 
@@ -332,7 +358,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         String[] datos= datosTxt.split("-");
         String commandName=datos[0];    
         ICommand command=manager.getCommand(commandName);   
-        command.execute(datos,txtArea_Command,jugadorActual);
+        command.execute(datos,this,jugadorActual);
         txtArea_Escribir.setText("");
     }//GEN-LAST:event_btn_EnviarActionPerformed
 
@@ -374,16 +400,16 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Enviar;
-    private javax.swing.JButton btn_Instrucciones;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel panelMatriz;
-    private javax.swing.JTextArea txtArea_Command;
-    private javax.swing.JTextArea txtArea_Escribir;
+    public javax.swing.JButton btn_Enviar;
+    public javax.swing.JButton btn_Instrucciones;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JPanel panelMatriz;
+    public javax.swing.JTextArea txtArea_Command;
+    public javax.swing.JTextArea txtArea_Escribir;
     // End of variables declaration//GEN-END:variables
 }
