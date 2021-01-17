@@ -142,15 +142,16 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         }
     }
     
+    
     pack();
     setVisible(true);
     jugadorActual.setMatrizCasillas(casillas);
-    /*
+    
     for(int r=0; r < casillas.length; r++){
         for(int c=0; c<casillas[r].length; c++){
             System.out.println(casillas[r][c].getColor()+" - X: "+casillas[r][c].getX()+" - Y: "+casillas[r][c].getY());
         }
-    }*/
+    }
    
 }
 
