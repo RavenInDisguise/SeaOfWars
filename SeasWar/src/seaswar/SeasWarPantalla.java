@@ -10,6 +10,8 @@ import Command.CommandManager;
 import Command.CrearPersonajeCommand;
 import Command.ICommand;
 import Logica.Jugador;
+import Logica.Casilla;
+import Logica.Luchador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -49,7 +51,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txtArea_Command.append(msj + "\n");
     }  
     
-    public void convertMatrixToGUI(int color1, int color2, int color3) {
+    public void convertMatrixToGUI(Jugador jugadorActual, int color1, Luchador luchador1, int color2, Luchador luchador2, int color3, Luchador luchador3) {
     int cantidad1 = (color1*600)/100; //GRIS - 180
     int cantidad2 = (color2*600)/100; //AZUL - 240
     int cantidad3 = (color3*600)/100; //VERDE - 180
@@ -58,6 +60,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     int cont3 = 0;
     
     String [][]matrix = new String[21][31];
+    Casilla [][]casillas = new Casilla[21][31];
     JButton [][]butt = new JButton[21][31];
     JLabel [][]lbl = new JLabel[21][31];
     
@@ -71,6 +74,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             butt[r][c] = new JButton(matrix[r][c]);
             butt[r][c].setPreferredSize(new Dimension(25, 25));
             butt[r][c].setFont(fuente);
+            casillas[r][c] = new Casilla("","blanco",null,butt[r][c],r,c);
             if (r==0 && c==0){
                 lbl[r][c] = new JLabel(matrix[r][c]);
                 lbl[r][c].setPreferredSize(new Dimension(25, 25));
@@ -98,7 +102,9 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 switch (caso) {
                     case 1:
                         if (cont1<cantidad1){
-                            butt[r][c].setBackground(Color.LIGHT_GRAY);
+                            butt[r][c].setBackground(Color.LIGHT_GRAY); //String historialAtaques, Luchador luchadorRepresentado, Button refBoton, int x, int y
+                            casillas[r][c].setLuchadorRepresentado(luchador1);
+                            casillas[r][c].setColor("gris");
                             panelMatriz.add(butt[r][c]);
                             cont1+=1;
                             c++;
@@ -109,6 +115,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     case 2:
                         if (cont2<cantidad2){
                             butt[r][c].setBackground(Color.BLUE);
+                            casillas[r][c].setLuchadorRepresentado(luchador2);
+                            casillas[r][c].setColor("azul");
                             panelMatriz.add(butt[r][c]);
                             cont2+=1;
                             c++;
@@ -119,6 +127,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     default:
                         if (cont3<cantidad3){
                             butt[r][c].setBackground(Color.GREEN);
+                            casillas[r][c].setLuchadorRepresentado(luchador3);
+                            casillas[r][c].setColor("verde");
                             panelMatriz.add(butt[r][c]);
                             cont3+=1;
                             c++;
@@ -134,7 +144,13 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     
     pack();
     setVisible(true);
-    
+    jugadorActual.setMatrizCasillas(casillas);
+    /*
+    for(int r=0; r < casillas.length; r++){
+        for(int c=0; c<casillas[r].length; c++){
+            System.out.println(casillas[r][c].getColor()+" - X: "+casillas[r][c].getX()+" - Y: "+casillas[r][c].getY());
+        }
+    }*/
    
 }
 
