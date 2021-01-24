@@ -11,13 +11,14 @@ import java.awt.TextArea;
 import java.io.OutputStream;
 import java.util.Arrays;
 import javax.swing.JTextArea;
+import seaswar.SeasWarPantalla;
 
 public class CrearPersonajeCommand extends BaseCommand {       
     public static final String COMMAN_NAME = "CREAR_PERSONAJE";       
     
     
-    public void mostrarPantalla(JTextArea txtArea_Command){
-        txtArea_Command.append("Ingrese un nombre: \n"
+    public void mostrarPantalla(SeasWarPantalla pantalla){
+        pantalla.txtArea_Command.append("Ingrese un nombre: \n"
                                 + "Ingrese un grupo entre (Manta Negra, Poseidon y Aquaman: \n"
                                 + "Ingrese el porcentaje que representa para la civilizacion: \n"
                                 + "Ingrese su porcentaje de poder: \n"
@@ -27,7 +28,7 @@ public class CrearPersonajeCommand extends BaseCommand {
                                 + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n");
     }
     @Override
-    public void execute(String[] datos, JTextArea txtArea_Command, Jugador jugador) {      
+    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {      
         /*
         String nombreLuchador; 1
         String Grupo; 2

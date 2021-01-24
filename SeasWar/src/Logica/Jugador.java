@@ -14,8 +14,41 @@ import java.util.ArrayList;
 public class Jugador {
     String nombreUsuario;
     ArrayList<Luchador> luchadores=new ArrayList<>();
+    Casilla [][]matrizCasillas;
     
     public void agregarLuchador(Luchador luchador){
         luchadores.add(luchador);
     }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public ArrayList<Luchador> getLuchadores() {
+        return luchadores;
+    }
+
+    public void setLuchadores(ArrayList<Luchador> luchadores) {
+        this.luchadores = luchadores;
+    }
+    
+    public int getSizeLuchadores(){
+        return luchadores.size();
+    }
+
+    public Casilla[][] getMatrizCasillas() {
+        return matrizCasillas;
+    }
+
+    public void setMatrizCasillas(Casilla[][] matrizCasillas) {
+        this.matrizCasillas = matrizCasillas;
+    }
+
+    
+    
+    
 }
