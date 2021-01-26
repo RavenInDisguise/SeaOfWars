@@ -18,15 +18,24 @@ public class ErrorCommand extends BaseCommand {
     public String getCommandName() {           
         return COMMAND_NAME;   
     }       
-    
+   
     @Override
-    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {
-        pantalla.txtArea_Command.append("El comando escrito presenta un error. Intente de nuevo."); //To change body of generated methods, choose Tools | Templates.
+    public String execute(String datos, Jugador jugador) {
+       String instrucciones="El comando escrito presenta un error. Intente de nuevo.";
+       return instrucciones;
     }
 
     @Override
-    public void mostrarPantalla(SeasWarPantalla pantalla) {
-        pantalla.txtArea_Command.append("*****************************");
+    public String mostrarInstrucciones() {
+       String instrucciones="El comando se presenta cuando ocurre un error.";
+       return instrucciones;
     }
+
+    @Override
+    public String[] splitCommands(String datostxt) {
+        String[] datos= datostxt.split("-");
+        return datos;
+    }
+    
 }
 

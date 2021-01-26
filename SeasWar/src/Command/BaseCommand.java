@@ -16,9 +16,9 @@ public abstract class BaseCommand implements ICommand {
     @Override       
     public abstract String getCommandName();       
       
-    public abstract void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador);   
+    public abstract String execute(String datos, Jugador jugador);   
     
-    public abstract void mostrarPantalla(SeasWarPantalla pantalla);
+    public abstract String mostrarInstrucciones();
     
     public void write(String message) {           
         try {   

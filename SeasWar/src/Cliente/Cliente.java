@@ -5,6 +5,7 @@
  */
 package Cliente;
 
+import Logica.Jugador;
 import java.net.Socket;
 import javax.swing.JOptionPane;
 import seaswar.SeasWarPantalla;
