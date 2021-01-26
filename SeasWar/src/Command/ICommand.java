@@ -13,6 +13,7 @@ import seaswar.SeasWarPantalla;
 
 public interface ICommand {       
     public String getCommandName();       
-    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador); 
-    public void mostrarPantalla(SeasWarPantalla pantalla);
+    public String execute(String datos, Jugador jugador); 
+    public String mostrarInstrucciones();
+    public String[] splitCommands(String datos);
 }

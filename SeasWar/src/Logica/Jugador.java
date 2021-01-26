@@ -5,16 +5,38 @@
  */
 package Logica;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import seaswar.SeasWarPantalla;
 
 /**
  *
  * @author monic
  */
 public class Jugador {
-    String nombreUsuario;
-    ArrayList<Luchador> luchadores=new ArrayList<>();
-    Casilla [][]matrizCasillas;
+    protected String nombreUsuario;
+    protected ArrayList<Luchador> luchadores=new ArrayList<>();
+    public Casilla [][]casillas = new Casilla[21][31];
+    protected SeasWarPantalla refPantallaJugador;
+    
+    public Jugador(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+    public Jugador() {
+    }
+
+    public SeasWarPantalla getRefPantallaJugador() {
+        return refPantallaJugador;
+    }
+
+    public void setRefPantallaJugador(SeasWarPantalla refPantallaJugador) {
+        this.refPantallaJugador = refPantallaJugador;
+    }
     
     public void agregarLuchador(Luchador luchador){
         luchadores.add(luchador);
@@ -41,14 +63,74 @@ public class Jugador {
     }
 
     public Casilla[][] getMatrizCasillas() {
-        return matrizCasillas;
+        return casillas;
     }
 
     public void setMatrizCasillas(Casilla[][] matrizCasillas) {
-        this.matrizCasillas = matrizCasillas;
+        this.casillas = matrizCasillas;
     }
-
     
+    public void generarMatrizCasillas(Luchador luchador1, Luchador luchador2, Luchador luchador3) {
+    int cantidad1 = (luchador1.porcentajeCivilizacion*600)/100; //GRIS 
+    int cantidad2 = (luchador2.porcentajeCivilizacion*600)/100; //AZUL 
+    int cantidad3 = (luchador3.porcentajeCivilizacion*600)/100; //VERDE 
+    int cont1 = 0;
+    int cont2 = 0;
+    int cont3 = 0;
+  
+    for(int r=0; r<=20; r++){
+        for(int c=0; c<=30; ){
+            casillas[r][c] = new Casilla("","blanco",null,null,r,c);
+            if (r==0 && c==0){
+                c++;
+            }
+            else if (r==0){
+                c++;
+            }
+            else if (c==0){
+                c++;
+            }else{
+                int caso = (int) (Math.random() * 3) + 1;
+                switch (caso) {
+                    case 1:
+                        if (cont1<cantidad1){
+                            casillas[r][c].setLuchadorRepresentado(luchador1);
+                            casillas[r][c].setColor("gris");
+                            cont1+=1;
+                            c++;
+                            continue;
+                        }else{
+                            continue;
+                        }
+                    case 2:
+                        if (cont2<cantidad2){
+                            casillas[r][c].setLuchadorRepresentado(luchador2);
+                            casillas[r][c].setColor("azul");
+                            cont2+=1;
+                            c++;
+                            continue;
+                        }else{
+                            continue;
+                        }
+                    default:
+                        if (cont3<cantidad3){
+                            casillas[r][c].setLuchadorRepresentado(luchador3);
+                            casillas[r][c].setColor("verde");
+                            cont3+=1;
+                            c++;
+                            continue;
+                        }else{
+                            continue;
+                        }
+                }
+            }
+        }
+    }
     
-    
+    for (int i = 0; i <21; i++) // El primer índice recorre las filas.
+	for (int j = 0; j <31; j++){ // El segundo índice recorre las columnas.
+	// Procesamos cada elemento de la matriz.
+            System.out.println(casillas[i][j].color);
+        }
+    }   
 }
