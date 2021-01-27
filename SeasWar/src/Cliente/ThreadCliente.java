@@ -56,17 +56,12 @@ public class ThreadCliente extends Thread{
                         String usuario=reader.readUTF();
                         refPantalla.addBitacora("Ingresó el jugador: "+usuario+".\n");
                     break;
-                    case 6: //Llenar pantalla
-                        int valor1=reader.readInt();
-                        String nombre1=reader.readUTF();
-                        int casillas1=reader.readInt();
-                        int valor2=reader.readInt();
-                        String nombre2=reader.readUTF();
-                        int casillas2=reader.readInt();
-                        int valor3=reader.readInt();
-                        String nombre3=reader.readUTF();
-                        int casillas3=reader.readInt();
-                        refPantalla.rellenarLabelsLuchadores(valor1, nombre1, casillas1, valor2, nombre2, casillas2, valor3, nombre3, casillas3);
+                    case 6: //Llenar pantalla de datos del jugador
+                        int pos=reader.readInt();
+                        String nombreLuchador1=reader.readUTF();
+                        int totales1=reader.readInt();
+                        int vivas1=reader.readInt();
+                        refPantalla.rellenarLabelsLuchadores(pos, nombreLuchador1, totales1, vivas1);
                     break;
                     case 7:
                         int i=reader.readInt();

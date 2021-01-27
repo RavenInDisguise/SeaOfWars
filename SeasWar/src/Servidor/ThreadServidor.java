@@ -95,18 +95,16 @@ class ThreadServidor extends Thread{
                         writer.writeInt(4);
                         writer.writeUTF(mensajeRetorno2);
                      break;
-                    case 5: 
+                    case 5:  //Cargar matriz
                         try {
-                            //Cargar matriz
                             jugadorActual.generarMatrizCasillas(jugadorActual.getLuchadores().get(0),jugadorActual.getLuchadores().get(1),jugadorActual.getLuchadores().get(2));
-                            for (int i = 0; i <21; i++){ // El primer índice recorre las filas.
-                                for (int j = 0; j <31; j++){ 
+                            for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
+                                for (int j = 0; j <30; j++){ 
                                     writer.writeInt(7);
                                     writer.writeInt(i);
                                     writer.writeInt(j);
                                     Casilla [][]casillasJugador = jugadorActual.getMatrizCasillas();
                                     writer.writeUTF(casillasJugador[i][j].color);
-                                   
                                 }
                              }
                            
@@ -116,19 +114,16 @@ class ThreadServidor extends Thread{
                     break; 
                     case 6:
                         try{
-                            int contador1=calcularCasillas(jugadorActual.getLuchadores().get(0));
-                            int contador2=calcularCasillas(jugadorActual.getLuchadores().get(1));
-                            int contador3=calcularCasillas(jugadorActual.getLuchadores().get(2));
-                            writer.writeInt(6);
-                            writer.writeInt(jugadorActual.getLuchadores().get(0).getPorcentajeCivilizacion());
-                            writer.writeUTF(jugadorActual.getLuchadores().get(0).getNombreLuchador());
-                            writer.writeInt(contador1);
-                            writer.writeInt(jugadorActual.getLuchadores().get(1).getPorcentajeCivilizacion());
-                            writer.writeUTF(jugadorActual.getLuchadores().get(1).getNombreLuchador());
-                            writer.writeInt(contador2);
-                            writer.writeInt(jugadorActual.getLuchadores().get(2).getPorcentajeCivilizacion());
-                            writer.writeInt(contador3);
-                            writer.writeUTF(jugadorActual.getLuchadores().get(2).getNombreLuchador());
+                            for(int i=0; i<jugadorActual.getLuchadores().size();i++){
+                                int casillasVivas1=calcularCasillas(jugadorActual.getLuchadores().get(i));
+                                int casillasTotales1=calcularCasillasTotales(jugadorActual.getLuchadores().get(i));
+                                writer.writeInt(6);
+                                writer.writeInt(i);
+                                writer.writeUTF(jugadorActual.getLuchadores().get(i).getNombreLuchador());
+                                writer.writeInt(casillasTotales1);
+                                writer.writeInt(casillasVivas1);
+                            }
+                            
                         
                         }catch (IOException ex) {
                             Logger.getLogger(ThreadServidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,8 +148,8 @@ class ThreadServidor extends Thread{
     
     public int calcularCasillas(Luchador luchador){
         int contador=0;
-         for (int i = 0; i <21; i++){ // El primer índice recorre las filas.
-            for (int j = 0; j <31; j++){ 
+         for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
+            for (int j = 0; j <30; j++){ 
                 Casilla [][]casillasJugador = jugadorActual.getMatrizCasillas();
                 if(casillasJugador[i][j].luchadorRepresentado.equals(luchador)){
                     if(casillasJugador[i][j].porcentajeVida>0){
@@ -162,6 +157,21 @@ class ThreadServidor extends Thread{
                     }
 
             }
+            }
+        }
+        return contador;
+    }
+    
+    public int calcularCasillasTotales(Luchador luchador){
+        int contador=0;
+         for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
+            for (int j = 0; j <30; j++){ 
+                Casilla [][]casillasJugador = jugadorActual.getMatrizCasillas();
+                if(casillasJugador[i][j].luchadorRepresentado.equals(luchador)){
+                   contador++;
+                    
+
+                }
             }
         }
         return contador;

@@ -151,25 +151,46 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     
     public void pintarMatriz(int i, int j, String color){
          if(color.equals("gris")){
-            butt[i][j].setBackground(Color.DARK_GRAY);
+            butt[i+1][j+1].setBackground(Color.DARK_GRAY);
         }else if(color.equals("verde")){
-            butt[i][j].setBackground(Color.GREEN);
+            butt[i+1][j+1].setBackground(Color.GREEN);
         }else if(color.equals("azul")){
-            butt[i][j].setBackground(Color.BLUE);
+            butt[i+1][j+1].setBackground(Color.BLUE);
         }
     }
-    public void rellenarLabelsLuchadores(int cantidad1, String nombre1, int valor1,int cantidad2, String nombre2, int valor2,int cantidad3, String nombre3, int valor3){
-        lbl_nombrePersonaje1.setText(nombre1);
-        int destruida1=cantidad1-valor1;
-        lbl_casillasDest1.setText(destruida1+" de "+cantidad1);
-        //lbl_vida1.setText()
-        int destruida2=cantidad2-valor2;        
-        lbl_nombrePersonaje2.setText(nombre2);
-        lbl_casillasDest2.setText(destruida2+" de "+cantidad2);
+    public void rellenarLabelsLuchadores(int pos, String nombreLuchador1, int totales1, int vivas1){
+         int destruida1=0;
+         int porcentaje1=0;
+        switch(pos){
+            case 0:
+                //Luchador 1
+               lbl_nombrePersonaje1.setText(nombreLuchador1);
+               destruida1=totales1-vivas1;
+               lbl_casillasDest1.setText(destruida1+" de "+totales1);
+               porcentaje1=(vivas1/totales1)*100;
+               lbl_vida1.setText("Porcentaje: "+Integer.toString(porcentaje1));
+            break;    
+            case 1:
+                 //Luchador 2
+                lbl_nombrePersonaje2.setText(nombreLuchador1);
+                destruida1=totales1-vivas1; 
+                lbl_casillasDest2.setText(destruida1+" de "+totales1);
+                porcentaje1=(vivas1/totales1)*100;
+                lbl_vida2.setText("Porcentaje: "+Integer.toString(porcentaje1));
+            break;    
+            case 2:
+                //Luchador 3
+                lbl_nombrePersonaje3.setText(nombreLuchador1);
+                destruida1=totales1-vivas1;
+                lbl_casillasDest3.setText(destruida1+" de "+totales1);
+                porcentaje1=(vivas1/totales1)*100;
+                lbl_vida3.setText("Porcentaje: "+Integer.toString(porcentaje1));
+            break;    
+            default:
+        }
+       
+       
         
-        
-        lbl_nombrePersonaje3.setText(nombre3);
-        lbl_casillasDest3.setText(valor3+" de "+cantidad3);
     }
     
     public String[] splitText(String datostxt){
@@ -190,6 +211,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 generarPersonaje3Pantalla(datos);
                 try {
                     refCliente.hiloCliente.writer.writeInt(5);
+                    refCliente.hiloCliente.writer.writeInt(6);
                 } catch (IOException ex) {
                     Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -654,7 +676,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_casillasDest3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_vida2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lbl_vida2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(63, 63, 63)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_nombrePersonaje3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -662,7 +684,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_casillasDest2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_vida3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lbl_vida3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(62, 62, 62))
         );
         jPanel2Layout.setVerticalGroup(

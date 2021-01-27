@@ -21,7 +21,7 @@ import seaswar.SeasWarPantalla;
 public class Jugador {
     protected String nombreUsuario;
     protected ArrayList<Luchador> luchadores=new ArrayList<>();
-    public Casilla [][]casillas = new Casilla[21][31];
+    public Casilla [][]casillas = new Casilla[20][30];
     protected SeasWarPantalla refPantallaJugador;
     
     public Jugador(String nombreUsuario) {
@@ -78,59 +78,50 @@ public class Jugador {
     int cont2 = 0;
     int cont3 = 0;
   
-    for(int r=0; r<=20; r++){
-        for(int c=0; c<=30; ){
+     for(int r=0; r<20; r++){
+        for(int c=0; c<30; ){
             casillas[r][c] = new Casilla("","blanco",null,null,r,c);
-            if (r==0 && c==0){
-                c++;
-            }
-            else if (r==0){
-                c++;
-            }
-            else if (c==0){
-                c++;
-            }else{
-                int caso = (int) (Math.random() * 3) + 1;
-                switch (caso) {
-                    case 1:
-                        if (cont1<cantidad1){
-                            casillas[r][c].setLuchadorRepresentado(luchador1);
-                            casillas[r][c].setColor("gris");
-                            cont1+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
-                    case 2:
-                        if (cont2<cantidad2){
-                            casillas[r][c].setLuchadorRepresentado(luchador2);
-                            casillas[r][c].setColor("azul");
-                            cont2+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
-                    default:
-                        if (cont3<cantidad3){
-                            casillas[r][c].setLuchadorRepresentado(luchador3);
-                            casillas[r][c].setColor("verde");
-                            cont3+=1;
-                            c++;
-                            continue;
-                        }else{
-                            continue;
-                        }
+            int caso = (int) (Math.random() * 3) + 1;
+            switch (caso) {
+                case 1:
+                    if (cont1<cantidad1){
+                        casillas[r][c].setLuchadorRepresentado(luchador1);
+                        casillas[r][c].setColor("gris");
+                        cont1+=1;
+                        c++;
+                        continue;
+                    }else{
+                        continue;
+                    }
+                case 2:
+                    if (cont2<cantidad2){
+                        casillas[r][c].setLuchadorRepresentado(luchador2);
+                        casillas[r][c].setColor("azul");
+                        cont2+=1;
+                        c++;
+                        continue;
+                    }else{
+                        continue;
+                    }
+                default:
+                    if (cont3<cantidad3){
+                        casillas[r][c].setLuchadorRepresentado(luchador3);
+                        casillas[r][c].setColor("verde");
+                        cont3+=1;
+                        c++;
+                        continue;
+                    }else{
+                        continue;
+                    }
                 }
             }
-        }
+        
     }
-    
-    for (int i = 0; i <21; i++) // El primer índice recorre las filas.
-	for (int j = 0; j <31; j++){ // El segundo índice recorre las columnas.
+
+    for (int i = 0; i <20; i++) // El primer índice recorre las filas.
+	for (int j = 0; j <30; j++){ // El segundo índice recorre las columnas.
 	// Procesamos cada elemento de la matriz.
-            System.out.println(casillas[i][j].color);
+            System.out.println(casillas[i][j].luchadorRepresentado);
         }
     }   
 }
