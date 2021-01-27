@@ -14,7 +14,7 @@ public class CommandManager {
     
     private CommandManager() {           
         registCommand(CrearPersonajeCommand.COMMAN_NAME, CrearPersonajeCommand.class);
-        registCommand(ReadyCommand.COMMAN_NAME, ReadyCommand.class);
+        registCommand(MensajeCommand.COMMAN_NAME, MensajeCommand.class);
     }       
     
     public static synchronized CommandManager getIntance() {           
@@ -41,4 +41,3 @@ public class CommandManager {
         COMMANDS.put(commandName.toUpperCase(), command);   
     }   
 }
-

@@ -14,21 +14,24 @@ import javax.swing.JTextArea;
 import seaswar.SeasWarPantalla;
 
 public class CrearPersonajeCommand extends BaseCommand {       
-    public static final String COMMAN_NAME = "CREAR_PERSONAJE";       
+    public static final String COMMAN_NAME = "CREARPERSONAJE";       
     
     
-    public void mostrarPantalla(SeasWarPantalla pantalla){
-        pantalla.txtArea_Command.append("Ingrese un nombre: \n"
-                                + "Ingrese un grupo entre (Manta Negra, Poseidon y Aquaman: \n"
+    @Override
+    public String mostrarInstrucciones(){
+        String instrucciones="Ingrese un nombre: \n"
+                                + "Ingrese un grupo entre (Thunders under the sea, Fish telepathy, Release the kraken, Waves Control, The trident, Undersea volcanoes): \n"
                                 + "Ingrese el porcentaje que representa para la civilizacion: \n"
                                 + "Ingrese su porcentaje de poder: \n"
                                 + "Ingrese su porcentaje de resistencia: \n"
                                 + "Ingrese su porcentaje de sanidad: \n"
                                 + "Ingrese el url de su imagen: \n"
-                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n");
+                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n";
+     return instrucciones;
     }
+    
     @Override
-    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {      
+    public String execute(String datosText, Jugador jugador) {      
         /*
         String nombreLuchador; 1
         String Grupo; 2
@@ -36,14 +39,24 @@ public class CrearPersonajeCommand extends BaseCommand {
         int poderLuchador; 4
         int resistenciaLuchador; 5
         int SanidadLuchador; 6
+        String rutaImagen; 7
         */
-        Luchador luchadorNuevo = new Luchador(datos[1],datos[2],Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]),Integer. parseInt(datos[6]),datos[7]);
+        System.out.println(datosText);
+        String[] datos=splitCommands(datosText);
+        //datos[2].toLowerCase();
+        Luchador luchadorNuevo = new Luchador(datos[1].trim(),datos[2].trim() ,Integer. parseInt(datos[3].trim()),Integer. parseInt(datos[4].trim()),Integer. parseInt(datos[5].trim()),Integer. parseInt(datos[6].trim()),datos[7].trim());
         jugador.agregarLuchador(luchadorNuevo);
+        return "Luchador agregado exitosamente.";
     }       
     @Override           
     public String getCommandName() {           
         return COMMAN_NAME;   
     }   
 
-}
+    @Override
+    public String[] splitCommands(String datostxt) {
+        String[] datos=datostxt.split("-");
+        return datos;
+    }
 
+}

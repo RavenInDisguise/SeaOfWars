@@ -25,13 +25,20 @@ public class NotFoundCommand extends BaseCommand {
      * @param txtArea_Command
      * @param jugador
      */
+   
     @Override
-    public void execute(String[] datos, SeasWarPantalla pantalla, Jugador jugador) {
-        pantalla.txtArea_Command.append("El comando escrito no existe. Intente de nuevo.");//To change body of generated methods, choose Tools | Templates.
+    public String execute(String datos, Jugador jugador) {
+        return "El comando escrito no existe. Intente de nuevo.";
     }
-    
+
     @Override
-    public void mostrarPantalla(SeasWarPantalla pantalla) {
-        pantalla.txtArea_Command.append("*****************************");
+    public String mostrarInstrucciones() {
+        return "El comando escrito se presenta cuando el comando ingresado anteriormente no existe.";
+    }
+
+    @Override
+    public String[] splitCommands(String datostxt) {
+        String[] datos= datostxt.split("-");
+        return datos;
     }
 }
