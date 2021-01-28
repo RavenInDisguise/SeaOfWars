@@ -15,9 +15,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.text.html.HTML.Attribute.N;
 
 /**
  *
@@ -167,6 +169,31 @@ class ThreadServidor extends Thread{
                         }
                         
                     break;
+                    case 8: //esto va después de generarPersonajes() en la interfaz
+                        int cantPersonajes=reader.readInt();
+                        String listo=reader.readUTF();
+                        ICommand command8=manager.getCommand(listo.trim());  
+                        String mensajeRetorno8=command8.execute(listo, jugadorActual);
+                        if (mensajeRetorno8.equals("true")){
+                            juegoActual.contListos +=1;
+                            if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
+                                server.partidaIniciada=true;
+                                System.out.println(":Todos listos");
+                                generarOrdenAleatorio();
+                            }
+                        }
+                        
+                    break;
+                    case 9: //esto va después de generarPersonajes() en la interfaz
+                        juegoActual.contListos +=1;
+                        if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
+                            generarOrdenAleatorio();
+                            System.out.println("Todos listos");
+                            server.partidaIniciada=true;
+                        }
+                        
+                    break;
+                    
                     default:
                         
                     
@@ -198,5 +225,27 @@ class ThreadServidor extends Thread{
             }
         }
         return contador;
+    }
+    
+    public ArrayList<Jugador> generarOrdenAleatorio(){
+        ArrayList<Jugador> listaProvisional = new ArrayList<Jugador>();
+        listaProvisional = clonarListaJugadores(juegoActual.getJugadores(), listaProvisional);
+        for (int i = 0; i < juegoActual.getJugadores().size(); i++){ 
+            if (listaProvisional.size()==1){
+                juegoActual.jugadoresTurnados.add(listaProvisional.get(0));
+            }else{
+                int randomNum = (int) Math.floor(Math.random()*((listaProvisional.size()-1)-0+1)+0);
+                juegoActual.jugadoresTurnados.add(listaProvisional.get(randomNum));
+                listaProvisional.remove(listaProvisional.get(randomNum));
+            }
+        }
+        return juegoActual.getJugadoresTurnados();
+    }
+    
+    public ArrayList<Jugador> clonarListaJugadores(ArrayList<Jugador> jugadoresOficial, ArrayList<Jugador> jugadoresClonados){
+        for (int i = 0; i <jugadoresOficial.size(); i++){ 
+            jugadoresClonados.add(jugadoresOficial.get(i));
+        }
+        return jugadoresClonados;
     }
 }

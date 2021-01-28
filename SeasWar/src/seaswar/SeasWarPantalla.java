@@ -190,6 +190,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 generarPersonaje3Pantalla(datos);
                 try {
                     refCliente.hiloCliente.writer.writeInt(5);
+                    refCliente.hiloCliente.writer.writeInt(9); //HAY QUE BORRAR ESTA LINEA
                 } catch (IOException ex) {
                     Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -197,6 +198,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             break;    
             default:
                txArea_bitacora.append("Ya agregó 3 personajes.");
+               
+               
 
         }
     }
@@ -287,18 +290,18 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         String datos[];
         datos=splitText(datosTxt);
         if(datos.length>1){
-            contadorPersonajes++;
             if(contadorPersonajes<4){
                 try {
                     refCliente.hiloCliente.writer.writeInt(4);
                     refCliente.hiloCliente.writer.writeUTF(datosTxt);
+                    contadorPersonajes++;
                 } catch (IOException ex) {
                     Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
             generarPersonajes(datos);
             txtArea_Escribir.setText("");
+        
         }else{
             mostrarInstrucciones(); 
         }
@@ -316,6 +319,18 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txtArea_Escribir.setText("");
     }
 
+    public void verificarListo(){
+        String datosTxt=txtArea_Escribir.getText();
+        System.out.println(contadorPersonajes);
+        try {
+            refCliente.hiloCliente.writer.writeInt(8); //Hay que comentar esta línea en generarPersonajes()
+            refCliente.hiloCliente.writer.writeUTF(datosTxt);
+            refCliente.hiloCliente.writer.writeInt(contadorPersonajes); 
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
    
 //}
 
@@ -880,9 +895,9 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     private void txtArea_EscribirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtArea_EscribirKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==10){
-            //crearPersonajes();
-            enviarMensaje();
-            
+            crearPersonajes();
+            //enviarMensaje();
+            //verificarListo();
         }else{
             
         }   

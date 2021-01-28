@@ -22,7 +22,7 @@ public class Servidor {
     private boolean running = true;
     private ServerSocket srv;
     protected Juego juegoActual;
-    private boolean partidaIniciada = false;
+    public boolean partidaIniciada = false;
 
     public Servidor(ServerForm refPantalla) {
         this.refPantalla = refPantalla;
@@ -45,15 +45,15 @@ public class Servidor {
                 refPantalla.addMensaje(".: Esperando conexiones");
                 Socket refSocket = srv.accept();
                 refPantalla.addMensaje(".: Conexion realizada: " + (++contador));
-            
-            
                 // Thread
                 ThreadServidor newThread = new ThreadServidor(refSocket, this, juegoActual);
                 conexiones.add(newThread);
                 newThread.start();
+                
+                
             }else{
                     // OutputStream socket para poder hacer un writer
-                    refPantalla.addMensaje(":Conexión denegada: partida iniciada.");
+                    refPantalla.addMensaje(":Conexión denegada: partida iniciada. Orden a definir.");
                 }
         }
     }

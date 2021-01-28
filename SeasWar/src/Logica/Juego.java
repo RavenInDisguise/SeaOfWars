@@ -13,7 +13,9 @@ import java.util.ArrayList;
  */
 public class Juego {
     protected ArrayList<Jugador> jugadores=new ArrayList<Jugador>();
+    public ArrayList<Jugador> jugadoresTurnados=new ArrayList<Jugador>();
     private static Juego juego;
+    public int contListos =0;
 
     private Juego() {
     }
@@ -29,6 +31,14 @@ public class Juego {
         
         return juego;
     }
+
+    public ArrayList<Jugador> getJugadoresTurnados() {
+        return jugadoresTurnados;
+    }
+
+    public void setJugadoresTurnados(ArrayList<Jugador> jugadoresTurnados) {
+        this.jugadoresTurnados = jugadoresTurnados;
+    }
     
     public Juego clone(){
     try {
@@ -42,7 +52,9 @@ public class Juego {
     public void agregarJugadores(Jugador jugador){
         jugadores.add(jugador);
     }
-
+    public void agregarJugadoresOrden(Jugador jugador){
+        jugadores.add(jugador);
+    }
     public ArrayList<Jugador> getJugadores() {
         return jugadores;
     }
