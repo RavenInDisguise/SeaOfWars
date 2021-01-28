@@ -7,11 +7,6 @@ package Command;
 
 import Logica.Jugador;
 import Logica.Luchador;
-import java.awt.TextArea;
-import java.io.OutputStream;
-import java.util.Arrays;
-import javax.swing.JTextArea;
-import seaswar.SeasWarPantalla;
 
 public class CrearPersonajeCommand extends BaseCommand {       
     public static final String COMMAN_NAME = "CREARPERSONAJE";       
@@ -19,13 +14,13 @@ public class CrearPersonajeCommand extends BaseCommand {
     
     @Override
     public String mostrarInstrucciones(){
-        String instrucciones="Ingrese un nombre: \n"
-                                + "Ingrese un grupo entre (Thunders under the sea, Fish telepathy, Release the kraken, Waves Control, The trident, Undersea volcanoes): \n"
-                                + "Ingrese el porcentaje que representa para la civilizacion: \n"
-                                + "Ingrese su porcentaje de poder: \n"
-                                + "Ingrese su porcentaje de resistencia: \n"
-                                + "Ingrese su porcentaje de sanidad: \n"
-                                + "Ingrese el url de su imagen: \n"
+        String instrucciones="Ingrese un nombre:"
+                                + "Ingrese un grupo entre (Thunders under the sea, Fish telepathy, Release the kraken, Waves Control, The trident, Undersea volcanoes):"
+                                + "Ingrese el porcentaje que representa para la civilizacion:"
+                                + "Ingrese su porcentaje de poder:"
+                                + "Ingrese su porcentaje de resistencia:"
+                                + "Ingrese su porcentaje de sanidad:"
+                                + "Ingrese el url de su imagen:"
                                 + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n";
      return instrucciones;
     }

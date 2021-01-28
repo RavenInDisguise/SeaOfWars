@@ -9,7 +9,7 @@ package Strategy;
  *
  * @author monic
  */
-public class Thunders extends Atacar{
+public class Thunders{
 
     
     

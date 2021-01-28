@@ -5,12 +5,17 @@
  */
 package Strategy;
 
+import Logica.Jugador;
+
 /**
  *
  * @author monic
  */
-public class TheTrident{
+public class Tentaculos implements IAtacar {
 
-    
+    @Override
+    public void atacarCasillas(Jugador jugadorActual,String[] arrayComandos) {
+        System.out.println("TwT");
+    }
     
 }

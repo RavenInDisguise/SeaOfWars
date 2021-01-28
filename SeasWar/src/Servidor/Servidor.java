@@ -22,7 +22,7 @@ public class Servidor {
     private boolean running = true;
     private ServerSocket srv;
     protected Juego juegoActual;
-    private boolean partidaIniciada = false;
+    public boolean partidaIniciada = false;
 
     public Servidor(ServerForm refPantalla) {
         this.refPantalla = refPantalla;

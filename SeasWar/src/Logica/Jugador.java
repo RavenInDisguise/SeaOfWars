@@ -20,22 +20,28 @@ import seaswar.SeasWarPantalla;
  */
 public class Jugador {
     protected String nombreUsuario;
+    protected String logJugador;
     protected ArrayList<Luchador> luchadores=new ArrayList<>();
     public Casilla [][]casillas = new Casilla[20][30];
-    protected SeasWarPantalla refPantallaJugador;
     
     public Jugador(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
-    public Jugador() {
+
+    public String getLogJugador() {
+        return logJugador;
     }
 
-    public SeasWarPantalla getRefPantallaJugador() {
-        return refPantallaJugador;
+    public void setLogJugador(String logJugador) {
+        this.logJugador = logJugador;
     }
 
-    public void setRefPantallaJugador(SeasWarPantalla refPantallaJugador) {
-        this.refPantallaJugador = refPantallaJugador;
+    public Casilla[][] getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(Casilla[][] casillas) {
+        this.casillas = casillas;
     }
     
     public void agregarLuchador(Luchador luchador){
@@ -80,6 +86,7 @@ public class Jugador {
   
      for(int r=0; r<20; r++){
         for(int c=0; c<30; ){
+            System.out.println("ewe");
             casillas[r][c] = new Casilla("","blanco",null,null,r,c);
             int caso = (int) (Math.random() * 3) + 1;
             switch (caso) {

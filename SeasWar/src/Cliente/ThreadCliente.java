@@ -69,6 +69,11 @@ public class ThreadCliente extends Thread{
                         String color=reader.readUTF();
                         refPantalla.pintarMatriz(i, j, color);
                     break;
+                    case 8: 
+                        String remitente = reader.readUTF();
+                        String mensajeRecibido = reader.readUTF();
+                        refPantalla.addMensaje(remitente+": "+mensajeRecibido);
+                    break;
                     default:
                 }
             } catch (IOException ex) {

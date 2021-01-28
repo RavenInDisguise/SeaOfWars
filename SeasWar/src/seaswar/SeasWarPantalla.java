@@ -56,10 +56,24 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     public void setRefCliente(Cliente refCliente) {
         this.refCliente = refCliente;
     }
-    
-    public void setRefJugador(Jugador jugador){
-    }
+   
+    public void enviarMensaje(){
+        String datosTxt=txtArea_Escribir.getText();
+        String datos[];
+        datos=splitText(datosTxt);
+        if(datos.length>1){
+            try {
+                 refCliente.hiloCliente.writer.writeInt(7);
+                 refCliente.hiloCliente.writer.writeUTF(datosTxt);
+                } catch (IOException ex) {
+                    Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+            txtArea_Escribir.setText("");
+        }else{
+            mostrarInstrucciones(); 
+        }
+    }
     
     public void addMensaje(String msj){
         txtArea_Command.append(msj + "\n");
@@ -286,11 +300,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         lbl_imagen3.setIcon(new ImageIcon(image));
     }
     
-    public void crearPersonajes(){
+    public void crearPersonajes(String datos[]){
         String datosTxt=txtArea_Escribir.getText();
-        txtArea_Command.append(datosTxt+"\n");
-        String datos[];
-        datos=splitText(datosTxt);
         if(datos.length>1){
             contadorPersonajes++;
             if(contadorPersonajes<4){
@@ -307,6 +318,18 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         }else{
             mostrarInstrucciones(); 
         }
+    }
+    public void verificarListo(){
+        String datosTxt=txtArea_Escribir.getText();
+        System.out.println(contadorPersonajes);
+        try {
+            refCliente.hiloCliente.writer.writeInt(8); //Hay que comentar esta línea en generarPersonajes()
+            refCliente.hiloCliente.writer.writeUTF(datosTxt);
+            refCliente.hiloCliente.writer.writeInt(contadorPersonajes); 
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     public void mostrarInstrucciones(){
@@ -880,11 +903,26 @@ public class SeasWarPantalla extends javax.swing.JFrame {
 
     private void txtArea_EscribirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtArea_EscribirKeyPressed
         // TODO add your handling code here:
+        String datosTxt=txtArea_Escribir.getText();
         if(evt.getKeyCode()==10){
-            crearPersonajes();
-        }else{
-            
-        }   
+            txtArea_Command.append(datosTxt+"\n");
+            String datos[]=splitText(datosTxt);
+            if(datos[0].trim().equals("CREARPERSONAJE")){
+                crearPersonajes(datos);
+            }else if(datos[0].trim().equals("MENSAJE")){
+                enviarMensaje();
+            }else if(datos[0].trim().equals("LISTO")){
+                verificarListo();
+            }else{
+                try {
+                    refCliente.hiloCliente.writer.writeInt(4);
+                    refCliente.hiloCliente.writer.writeUTF(datosTxt);
+                } catch (IOException ex) {
+                    Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            txtArea_Escribir.setText("");
+        } 
     }//GEN-LAST:event_txtArea_EscribirKeyPressed
 
     /**

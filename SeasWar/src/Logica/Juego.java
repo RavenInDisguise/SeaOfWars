@@ -13,7 +13,9 @@ import java.util.ArrayList;
  */
 public class Juego {
     protected ArrayList<Jugador> jugadores=new ArrayList<Jugador>();
+    public ArrayList<Jugador> jugadoresTurnados=new ArrayList<Jugador>();
     private static Juego juego;
+    public int contListos =0;
 
     private Juego() {
     }
@@ -37,6 +39,22 @@ public class Juego {
             System.out.println("No se puede clonar un objeto de la clase Juego.");
     }
     return null; 
+    }
+
+    public ArrayList<Jugador> getJugadoresTurnados() {
+        return jugadoresTurnados;
+    }
+
+    public void setJugadoresTurnados(ArrayList<Jugador> jugadoresTurnados) {
+        this.jugadoresTurnados = jugadoresTurnados;
+    }
+
+    public int getContListos() {
+        return contListos;
+    }
+
+    public void setContListos(int contListos) {
+        this.contListos = contListos;
     }
     
     public void agregarJugadores(Jugador jugador){

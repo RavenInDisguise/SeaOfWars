@@ -5,28 +5,24 @@
  */
 package Logica;
 
-import Strategy.Atacar;
-import Strategy.FishTelepathy;
 import Strategy.IAtacar;
 import Strategy.ReleaseKraken;
-import Strategy.TheTrident;
-import Strategy.Thunders;
-import Strategy.Undersea;
-import Strategy.WavesControl;
+import Strategy.Tentaculos;
 
 /**
  *
  * @author monic
  */
-public class Luchador implements IAtacar{
+public class Luchador{
     String nombreLuchador;
     String Grupo;
     int porcentajeCivilizacion;
     int poderLuchador;
     int resistenciaLuchador;
     int SanidadLuchador;  
+    int porcentajeAumentado=1;
     String urlImagen;
-    Atacar ataque;
+    IAtacar iataque;
 
     public Luchador(String nombreLuchador, String Grupo, int porcentajeCivilizacion, int poderLuchador, int resistenciaLuchador, int SanidadLuchador, String url) {
         this.nombreLuchador = nombreLuchador;
@@ -36,8 +32,14 @@ public class Luchador implements IAtacar{
         this.resistenciaLuchador = resistenciaLuchador;
         this.SanidadLuchador = SanidadLuchador;
         this.urlImagen=url;
-        this.ataque=new Atacar();
-       
+    }
+
+    public IAtacar getIataque() {
+        return iataque;
+    }
+
+    public void setIataque(IAtacar iataque) {
+        this.iataque = iataque;
     }
 
     public String getNombreLuchador() {
@@ -96,41 +98,48 @@ public class Luchador implements IAtacar{
         this.urlImagen = urlImagen;
     }
 
-    @Override
-    public void atacarCasillas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void asignarAtaques(){ 
-        if("thunders under the sea".equals(this.Grupo)){
-            Atacar Thunders = new Thunders();
-            ataque=Thunders;
-            ataque=(Thunders)ataque;
-        }else if("fish telepathy".equals(this.Grupo)){ 
-            Atacar FishTelepathy = new FishTelepathy();
-            ataque=FishTelepathy;
-            ataque=(FishTelepathy)ataque;
-        }else if("release the kraken".equals(this.Grupo)){ 
-            Atacar ReleaseKraken = new ReleaseKraken();
-            ataque=ReleaseKraken;
-            ataque=(ReleaseKraken)ataque;
-        }else if("waves control".equals(this.Grupo)){
-            Atacar WavesControl = new WavesControl();
-            ataque=WavesControl;
-            ataque=(WavesControl)ataque;
-        }else if("the trident".equals(this.Grupo)){
-            Atacar TheTrident=new TheTrident();
-            ataque=TheTrident;
-            ataque=(TheTrident)ataque;
-        }else if("undersea volcanoes".equals(this.Grupo)){ 
-            Atacar Undersea=new Undersea();
-            ataque=Undersea;
-            ataque=(Undersea)ataque;
+    public void asignarAtaques(String ataque){ 
+        ataque=ataque.toUpperCase();
+        if(ataque.equals("SANIDAD")){ 
+            
+        }else if(ataque.equals("RESISTENCIA")){
+        
+        }else if(ataque.equals("FUERZA")){
+            
         }else{
-            System.out.println("No existe tal grupo.");
+            if(null == this.Grupo.toLowerCase()){
+                System.out.println("No existe tal grupo.");
+            }else switch (this.Grupo.toLowerCase()) {
+                case "thunders under the sea":
+
+                    break;
+                case "fish telepathy":
+                    if(ataque.equals("TENTACULOS")){
+                        iataque=new Tentaculos();
+                    }else if(ataque.equals("KRAKEN BREATH")){
+                        
+                    }else{
+                        
+                    }
+                    break;
+                case "release the kraken":
+
+                    break;
+                case "waves control":
+
+                    break;
+                case "the trident":
+
+                    break;
+                case "undersea volcanoes":
+
+                    break;
+                default:
+                    System.out.println("No existe tal grupo.");
+                    break;
+            }
         }
-    }
-    
+    }  
 }
 
 

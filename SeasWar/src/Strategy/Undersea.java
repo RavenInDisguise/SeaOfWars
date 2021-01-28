@@ -9,7 +9,7 @@ package Strategy;
  *
  * @author monic
  */
-public class Undersea extends Atacar{
+public class Undersea{
 
  
     

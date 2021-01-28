@@ -9,7 +9,7 @@ package Strategy;
  *
  * @author monic
  */
-public class WavesControl extends Atacar{
+public class WavesControl{
 
     
     

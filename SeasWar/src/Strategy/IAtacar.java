@@ -5,37 +5,17 @@
  */
 package Strategy;
 
+import Logica.Jugador;
+
 /**
  *
  * @author monic
  */
 public interface IAtacar {
-    public void atacarCasillas();
+    public void atacarCasillas(Jugador jugadorActual, String[] arrayComandos);
 }
 
-class FishAtaque1 implements IAtacar{
 
-    @Override
-    public void atacarCasillas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
-
-class FishAtaque2 implements IAtacar{
-
-    @Override
-    public void atacarCasillas(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
-
-class FishAtaque3 implements IAtacar{
-
-    @Override
-    public void atacarCasillas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
 
         
         

@@ -11,13 +11,11 @@ import Logica.Jugador;
  *
  * @author monic
  */
-public class ReleaseKraken implements IAtacar{
-
+public class KrakenBreath implements IAtacar{
+    
     @Override
     public void atacarCasillas(Jugador jugadorActual, String[] arrayComandos) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
     
 }
