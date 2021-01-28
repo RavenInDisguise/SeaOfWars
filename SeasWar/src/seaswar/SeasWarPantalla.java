@@ -319,13 +319,11 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             mostrarInstrucciones(); 
         }
     }
-    public void verificarListo(){
-        String datosTxt=txtArea_Escribir.getText();
-        System.out.println(contadorPersonajes);
+    public void verificarListo(String datosTxt){
         try {
+            //refCliente.hiloCliente.writer.writeInt(8);
             refCliente.hiloCliente.writer.writeInt(8); //Hay que comentar esta línea en generarPersonajes()
             refCliente.hiloCliente.writer.writeUTF(datosTxt);
-            refCliente.hiloCliente.writer.writeInt(contadorPersonajes); 
         } catch (IOException ex) {
             Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -912,7 +910,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             }else if(datos[0].trim().equals("MENSAJE")){
                 enviarMensaje();
             }else if(datos[0].trim().equals("LISTO")){
-                verificarListo();
+                verificarListo(datosTxt);
             }else{
                 try {
                     refCliente.hiloCliente.writer.writeInt(4);

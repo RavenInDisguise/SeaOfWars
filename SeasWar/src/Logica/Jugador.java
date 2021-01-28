@@ -23,9 +23,18 @@ public class Jugador {
     protected String logJugador;
     protected ArrayList<Luchador> luchadores=new ArrayList<>();
     public Casilla [][]casillas = new Casilla[20][30];
+    public boolean turno = false;
     
     public Jugador(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public boolean isTurno() {
+        return turno;
+    }
+
+    public void setTurno(boolean turno) {
+        this.turno = turno;
     }
 
     public String getLogJugador() {

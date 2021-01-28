@@ -90,11 +90,28 @@ class ThreadServidor extends Thread{
                         String[] datosArray=splitCommands(datos2);
                         ICommand command2=manager.getCommand(datosArray[0].trim());  
                         String mensajeRetorno2=command2.execute(datos2, jugadorActual);
+                        System.out.println(mensajeRetorno2);
                         /*for(int i=0; i<jugadorActual.getLuchadores().size();i++){
                             System.out.println("Luchadores "+jugadorActual.getLuchadores().get(i).getNombreLuchador());
                         }*/
+                        
                         writer.writeInt(4);
                         writer.writeUTF(mensajeRetorno2);
+                        if(mensajeRetorno2.equals("Ataque ejecutado.")){
+                            turnoSiguiente();
+                            String siguiente="";
+                            for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+                                if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                                    siguiente=juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                                }
+                            }
+                            for(int i=0; i<juegoActual.getJugadores().size();i++){
+                                ThreadServidor current = server.conexiones.get(i);
+                                current.writer.writeInt(4);
+                                current.writer.writeUTF("Turno de ataque: "+siguiente);
+                            }
+                        }
+                        
                     break;
                     case 5:  //Cargar matriz
                         try {
@@ -165,27 +182,39 @@ class ThreadServidor extends Thread{
                         }
 
                     break;
-                    case 8: //esto va después de generarPersonajes() en la interfaz
-                        int cantPersonajes=reader.readInt();
+                    case 8: 
+                        int cantPersonajes=jugadorActual.getSizeLuchadores();
                         String listo=reader.readUTF();
                         ICommand command8=manager.getCommand(listo.trim());
                         String mensajeRetorno8=command8.execute(listo, jugadorActual);
                         if (mensajeRetorno8.equals("true")){
                             juegoActual.contListos +=1;
-                            if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
+                            if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6 && server.conexiones.size()>=2){
                                 server.partidaIniciada=true;
-                                System.out.println(":Todos listos");
                                 generarOrdenAleatorio();
+                                String jugadoresOrden="";
+                                for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+                                    jugadoresOrden=jugadoresOrden+" - "+juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                                    }
+                                for(int i=0; i<juegoActual.getJugadores().size();i++){
+                                    ThreadServidor current = server.conexiones.get(i);
+                                    current.writer.writeInt(4);
+                                    current.writer.writeUTF("Todos los jugadores están listos. \n La partida inicia y el orden es: \n"+jugadoresOrden);
+                                    }
+                            }
+                        }else{
+                            for(int i=0; i<juegoActual.getJugadores().size();i++){
+                              ThreadServidor current = server.conexiones.get(i);
+                              if (current.nombre.equals(jugadorActual.getNombreUsuario())){
+                                current.writer.writeInt(4);
+                                current.writer.writeUTF("Debe agregar 3 luchadores para jugar.");
+                              }
                             }
                         }
+                        
                     break;
-                    case 9: //esto va después de generarPersonajes() en la interfaz
-                        juegoActual.contListos +=1;
-                        if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
-                            generarOrdenAleatorio();
-                            System.out.println("Todos listos");
-                            server.partidaIniciada=true;
-                        }
+                    case 9: 
+                        
                     break;
                     default:
                         
@@ -246,6 +275,7 @@ class ThreadServidor extends Thread{
                 //picha mama el TEC
             }
         }
+        juegoActual.getJugadoresTurnados().get(0).turno = true;
         return juegoActual.getJugadoresTurnados();
     }
     
@@ -254,5 +284,21 @@ class ThreadServidor extends Thread{
             jugadoresClonados.add(jugadoresOficial.get(i));
         }
         return jugadoresClonados;
+    }
+    
+    public void turnoSiguiente(){
+        for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+            if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                juegoActual.getJugadoresTurnados().get(i).setTurno(false);
+                if(i==juegoActual.getJugadoresTurnados().size()-1){
+                    juegoActual.getJugadoresTurnados().get(0).setTurno(true);
+                    break;
+                }else{
+                    juegoActual.getJugadoresTurnados().get(i+1).setTurno(true);
+                    break;
+                }
+            }
+        }
+        
     }
 }

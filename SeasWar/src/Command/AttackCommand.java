@@ -21,15 +21,22 @@ public class AttackCommand implements ICommand{
 
     @Override
     public String execute(String datos, Jugador jugador) {
+        String resultado = "";
         String datosArray[]=splitCommands(datos);
-        for(int i=0; i<jugador.getLuchadores().size();i++){ 
-            if(jugador.getLuchadores().get(i).getNombreLuchador().equals(datosArray[1].trim())){
-                jugador.getLuchadores().get(i).asignarAtaques(datosArray[2]);
-                jugador.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
+        if (jugador.isTurno()){
+            for(int i=0; i<jugador.getLuchadores().size();i++){ 
+                System.out.println(jugador.getLuchadores().get(i).getNombreLuchador());
+                System.out.println(datosArray[1].trim());
+                if(jugador.getLuchadores().get(i).getNombreLuchador().equals(datosArray[1].trim())){
+                    jugador.getLuchadores().get(i).asignarAtaques(datosArray[2]);
+                    jugador.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
+                    resultado = "Ataque ejecutado.";
+                    }
                 }
-            }
-        
-        return "Ataque ejecutado.";
+        }else{
+            resultado = "Ataque no ejecutado, NO es su turno.";
+        }
+        return resultado;
         
     }
 
