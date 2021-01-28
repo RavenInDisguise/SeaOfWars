@@ -243,6 +243,7 @@ class ThreadServidor extends Thread{
                 int randomNum = (int) Math.floor(Math.random()*((listaProvisional.size()-1)-0+1)+0);
                 juegoActual.jugadoresTurnados.add(listaProvisional.get(randomNum));
                 listaProvisional.remove(listaProvisional.get(randomNum));
+                //picha mama el TEC
             }
         }
         return juegoActual.getJugadoresTurnados();
