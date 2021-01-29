@@ -90,19 +90,12 @@ class ThreadServidor extends Thread{
                         String[] datosArray=splitCommands(datos2);
                         ICommand command2=manager.getCommand(datosArray[0].trim());  
                         String mensajeRetorno2=command2.execute(datos2, jugadorActual);
-                        /*for(int i=0; i<jugadorActual.getLuchadores().size();i++){
-                            System.out.println("Luchadores "+jugadorActual.getLuchadores().get(i).getNombreLuchador());
-                        }*/
                         writer.writeInt(4);
                         writer.writeUTF(mensajeRetorno2);
                     break;
                     case 5:  //Cargar matriz
                         try {
-                            for(int i=0; i<jugadorActual.getLuchadores().size();i++){
-                            System.out.println(jugadorActual.getLuchadores().get(i).getNombreLuchador());
-                            }
                             jugadorActual.generarMatrizCasillas(jugadorActual.getLuchadores().get(0),jugadorActual.getLuchadores().get(1),jugadorActual.getLuchadores().get(2));
-                            System.out.println("uwu");
                             for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
                                 for (int j = 0; j <30; j++){ 
                                     writer.writeInt(7);
@@ -120,8 +113,8 @@ class ThreadServidor extends Thread{
                     case 6:
                         try{
                             for(int i=0; i<jugadorActual.getLuchadores().size();i++){
-                                int casillasVivas1=calcularCasillas(jugadorActual.getLuchadores().get(i));
-                                int casillasTotales1=calcularCasillasTotales(jugadorActual.getLuchadores().get(i));
+                                int casillasVivas1=calcularCasillas(jugadorActual.getLuchadores().get(i),jugadorActual);
+                                int casillasTotales1=calcularCasillasTotales(jugadorActual.getLuchadores().get(i),jugadorActual);
                                 writer.writeInt(6);
                                 writer.writeInt(i);
                                 writer.writeUTF(jugadorActual.getLuchadores().get(i).getNombreLuchador());
@@ -137,7 +130,6 @@ class ThreadServidor extends Thread{
                         String[] datosMensaje=splitCommands(datos7);
                         ICommand command7=manager.getCommand(datosMensaje[0].trim());
                         String mensajeRetorno7=command7.execute(datos7, jugadorActual);
-                        String nombre;
                         if(datosMensaje[1].equals("GENERAL")){
                             nombre = jugadorActual.getNombreUsuario();
                             for(int i=0; i<juegoActual.getJugadores().size();i++){
@@ -163,35 +155,92 @@ class ThreadServidor extends Thread{
                                 }
                             }
                         }
-
                     break;
-                    case 8: //esto va después de generarPersonajes() en la interfaz
-                        int cantPersonajes=reader.readInt();
+                    case 8: 
+                        int cantPersonajes=jugadorActual.getSizeLuchadores();
                         String listo=reader.readUTF();
                         ICommand command8=manager.getCommand(listo.trim());
                         String mensajeRetorno8=command8.execute(listo, jugadorActual);
                         if (mensajeRetorno8.equals("true")){
                             juegoActual.contListos +=1;
-                            if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
+                            if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6 && server.conexiones.size()>=2){
                                 server.partidaIniciada=true;
-                                System.out.println(":Todos listos");
                                 generarOrdenAleatorio();
+                                String jugadoresOrden="";
+                                for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+                                    jugadoresOrden=jugadoresOrden+" - "+juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                                    }
+                                for(int i=0; i<juegoActual.getJugadores().size();i++){
+                                    ThreadServidor current = server.conexiones.get(i);
+                                    current.writer.writeInt(4);
+                                    current.writer.writeUTF("Todos los jugadores están listos. \n La partida inicia y el orden es: \n"+jugadoresOrden);
+                                    }
+                            }
+                        }
+                        else{
+                            for(int i=0; i<juegoActual.getJugadores().size();i++){
+                              ThreadServidor current = server.conexiones.get(i);
+                              if (current.nombre.equals(jugadorActual.getNombreUsuario())){
+                                current.writer.writeInt(4);
+                                current.writer.writeUTF("Debe agregar 3 luchadores para jugar.");
+                              }
                             }
                         }
                     break;
-                    case 9: //esto va después de generarPersonajes() en la interfaz
-                        juegoActual.contListos +=1;
-                        if(juegoActual.contListos==server.conexiones.size() && server.conexiones.size()<=6){
-                            generarOrdenAleatorio();
-                            System.out.println("Todos listos");
-                            server.partidaIniciada=true;
+                    case 9: 
+                        
+                    break;
+                    case 10:
+                        String datos3=reader.readUTF();
+                        String[] datosArray3=splitCommands(datos3);
+                        String mensajeRetorno3="";
+                        String historialAtaque="";
+                        ICommand command3=manager.getCommand(datosArray3[0].trim()); 
+                        if (jugadorActual.isTurno()){ //Si es el turno del jugador
+                            for(int i=0; i<server.conexiones.size();i++){ //Busca el jugador a Atacar
+                                ThreadServidor current = server.conexiones.get(i);
+                                if(current.jugadorActual.getNombreUsuario().trim().toUpperCase().equals(datosArray3[2].trim().toUpperCase())){
+                                    mensajeRetorno3="Ataque ejecutado por: "+nombre+"\n";
+                                    mensajeRetorno3+=command3.execute(datos3, current.jugadorActual);
+                                    historialAtaque+=recorrerCasillas(current.jugadorActual);
+                                    jugadorActual.setLogJugadorEnviado(historialAtaque);
+                                    for(int j=0; j<current.jugadorActual.getLuchadores().size();j++){ //Busca las casillas afectadas y las actualiza
+                                        int casillasVivas1=calcularCasillas(current.jugadorActual.getLuchadores().get(j),juegoActual.getJugadores().get(i));
+                                        int casillasTotales1=calcularCasillasTotales(current.jugadorActual.getLuchadores().get(j), juegoActual.getJugadores().get(i));
+                                        current.writer.writeInt(6);
+                                        current.writer.writeInt(j);
+                                        current.writer.writeUTF(current.jugadorActual.getLuchadores().get(j).getNombreLuchador());
+                                        current.writer.writeInt(casillasTotales1);
+                                        current.writer.writeInt(casillasVivas1);
+                                    }
+                                }
+                                }
+                                for(int i=0; i<server.conexiones.size();i++){ //Rellena la bitacora y la lista de ataques
+                                     ThreadServidor current = server.conexiones.get(i);
+                                     current.writer.writeInt(4);
+                                     current.writer.writeUTF(mensajeRetorno3);
+                                     current.writer.writeInt(9);
+                                     current.writer.writeUTF(historialAtaque);
+                                }
+
+                                turnoSiguiente();
+                                String siguiente="";
+                                for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){ //Hace los turnos
+                                    if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                                        siguiente=juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                                    }
+                                }
+                                for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                                    ThreadServidor current = server.conexiones.get(i);
+                                    current.writer.writeInt(4);
+                                    current.writer.writeUTF("Turno de ataque: "+siguiente);
+                                }
+                            }else{
+                                writer.writeInt(4);
+                                writer.writeUTF("NO puede atacar. No es su turno.");
                         }
                     break;
                     default:
-                        
-                    
-                    
-                    
                 }
             } catch (IOException ex) {
                 
@@ -204,27 +253,27 @@ class ThreadServidor extends Thread{
         return datos;
     }
     
-    public int calcularCasillas(Luchador luchador){
+    public int calcularCasillas(Luchador luchador, Jugador jugador){
         int contador=0;
          for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
             for (int j = 0; j <30; j++){ 
-                Casilla [][]casillasJugador = jugadorActual.getMatrizCasillas();
+                Casilla [][]casillasJugador = jugador.getMatrizCasillas();
                 if(casillasJugador[i][j].luchadorRepresentado.equals(luchador)){
                     if(casillasJugador[i][j].porcentajeVida>0){
                         contador++;
                     }
 
-            }
+                }
             }
         }
         return contador;
     }
     
-    public int calcularCasillasTotales(Luchador luchador){
+    public int calcularCasillasTotales(Luchador luchador, Jugador jugador){
         int contador=0;
          for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
             for (int j = 0; j <30; j++){ 
-                Casilla [][]casillasJugador = jugadorActual.getMatrizCasillas();
+                Casilla [][]casillasJugador = jugador.getMatrizCasillas();
                 if(casillasJugador[i][j].luchadorRepresentado.equals(luchador)){
                    contador++;
                 }
@@ -245,6 +294,7 @@ class ThreadServidor extends Thread{
                 listaProvisional.remove(listaProvisional.get(randomNum));
             }
         }
+        juegoActual.getJugadoresTurnados().get(0).turno = true;
         return juegoActual.getJugadoresTurnados();
     }
     
@@ -254,4 +304,35 @@ class ThreadServidor extends Thread{
         }
         return jugadoresClonados;
     }
+    
+        public String recorrerCasillas(Jugador jugador){
+         String historialTemp="";
+         for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
+            for (int j = 0; j <30; j++){ 
+                Casilla [][]casillasJugador = jugador.getMatrizCasillas();
+                    if(casillasJugador[i][j].ataqueReciente){
+                        historialTemp+=casillasJugador[i][j].historialAtaques;
+                        casillasJugador[i][j].ataqueReciente=false;
+                    }
+
+                }
+            }
+            return historialTemp;
+        }
+        
+        public void turnoSiguiente(){
+        for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+            if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                juegoActual.getJugadoresTurnados().get(i).setTurno(false);
+                if(i==juegoActual.getJugadoresTurnados().size()-1){
+                    juegoActual.getJugadoresTurnados().get(0).setTurno(true);
+                    break;
+                }else{
+                    juegoActual.getJugadoresTurnados().get(i+1).setTurno(true);
+                    break;
+                }
+            }
+        }
+        }
+        
 }

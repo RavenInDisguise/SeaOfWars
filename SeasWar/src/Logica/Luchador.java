@@ -114,6 +114,9 @@ public class Luchador{
 
                     break;
                 case "fish telepathy":
+                    
+                    break;
+                case "release the kraken":
                     if(ataque.equals("TENTACULOS")){
                         iataque=new Tentaculos();
                     }else if(ataque.equals("KRAKEN BREATH")){
@@ -121,9 +124,6 @@ public class Luchador{
                     }else{
                         
                     }
-                    break;
-                case "release the kraken":
-
                     break;
                 case "waves control":
 

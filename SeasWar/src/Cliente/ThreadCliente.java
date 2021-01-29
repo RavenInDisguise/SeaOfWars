@@ -6,7 +6,6 @@
 package Cliente;
 
 import seaswar.SeasWarPantalla;
-import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -74,6 +73,10 @@ public class ThreadCliente extends Thread{
                         String mensajeRecibido = reader.readUTF();
                         refPantalla.addMensaje(remitente+": "+mensajeRecibido);
                     break;
+                    case 9:
+                        String historial=reader.readUTF();
+                        refPantalla.addAtaque(historial);
+                    break;    
                     default:
                 }
             } catch (IOException ex) {

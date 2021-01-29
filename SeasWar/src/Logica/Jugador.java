@@ -5,14 +5,7 @@
  */
 package Logica;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import seaswar.SeasWarPantalla;
 
 /**
  *
@@ -20,20 +13,38 @@ import seaswar.SeasWarPantalla;
  */
 public class Jugador {
     protected String nombreUsuario;
-    protected String logJugador;
+    protected String logJugadorRecibido="Ataques recibidos: \n";
+    protected String logJugadorEnviado="Ataques enviados: \n";
     protected ArrayList<Luchador> luchadores=new ArrayList<>();
     public Casilla [][]casillas = new Casilla[20][30];
+    public boolean turno = false;
     
     public Jugador(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getLogJugador() {
-        return logJugador;
+    public boolean isTurno() {
+        return turno;
     }
 
-    public void setLogJugador(String logJugador) {
-        this.logJugador = logJugador;
+    public void setTurno(boolean turno) {
+        this.turno = turno;
+    }
+    
+    public String getLogJugadorEnviado() {
+        return logJugadorEnviado;
+    }
+
+    public void setLogJugadorEnviado(String logJugadorEnviado) {
+        this.logJugadorEnviado = logJugadorEnviado;
+    }
+
+    public String getLogJugadorRecibido() {
+        return logJugadorRecibido;
+    }
+
+    public void setLogJugadorRecibido(String logJugador) {
+        this.logJugadorRecibido += logJugador;
     }
 
     public Casilla[][] getCasillas() {

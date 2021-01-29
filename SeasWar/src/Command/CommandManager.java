@@ -16,7 +16,7 @@ public class CommandManager {
         registCommand(CrearPersonajeCommand.COMMAN_NAME, CrearPersonajeCommand.class);
         registCommand(AttackCommand.COMMAND_NAME, AttackCommand.class);
         registCommand(MensajeCommand.COMMAN_NAME, MensajeCommand.class);
-        //registCommand(ReadyCommand.COMMAN_NAME, ReadyCommand.class);
+        registCommand(ListoCommand.COMMAN_NAME, ListoCommand.class);
     }       
     
     public static synchronized CommandManager getIntance() {           

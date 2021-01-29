@@ -22,21 +22,18 @@ public class AttackCommand implements ICommand{
     @Override
     public String execute(String datos, Jugador jugador) {
         String datosArray[]=splitCommands(datos);
-        for(int i=0; i<jugador.getLuchadores().size();i++){ 
-            if(jugador.getLuchadores().get(i).getNombreLuchador().equals(datosArray[1].trim())){
-                jugador.getLuchadores().get(i).asignarAtaques(datosArray[2]);
+        for(int i=0; i<jugador.getLuchadores().size();i++){
+                jugador.getLuchadores().get(i).asignarAtaques(datosArray[3]);
                 jugador.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
-                }
-            }
-        
-        return "Ataque ejecutado.";
+        }
+        return "Ataque ejecutado a: "+datosArray[2];
         
     }
 
     @Override
     public String mostrarInstrucciones() {
         String instrucciones="Release the kraken:"
-                + "-Tentaculos: Escriba 3 x,y para que aparezcan 3 tentaculos."
+                + "-Tentaculos: "
                 +"-Kraken breath: Escriba un x,y para que se destruyan de 1 a 8 casillas en alguna direccion.";
         return instrucciones;
        

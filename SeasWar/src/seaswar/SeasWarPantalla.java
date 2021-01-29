@@ -83,6 +83,10 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         txArea_bitacora.append(msj + "\n");
     }  
     
+    public void addAtaque(String msj){
+        txta_ataques.append(msj + "\n");
+    } 
+    
     public void convertirMatrizGUI() {
     
     panelMatriz.setLayout(new GridLayout(21, 31));
@@ -181,24 +185,36 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                lbl_nombrePersonaje1.setText(nombreLuchador1);
                destruida1=totales1-vivas1;
                lbl_casillasDest1.setText(destruida1+" de "+totales1);
-               porcentaje1=(vivas1/totales1)*100;
-               lbl_vida1.setText("Porcentaje: "+Integer.toString(porcentaje1));
+               if(vivas1>0){
+                porcentaje1=(vivas1*100)/totales1;
+                lbl_vida1.setText("Porcentaje: "+porcentaje1);
+               }else{
+                   lbl_vida1.setText("Porcentaje: 0");
+               }
             break;    
             case 1:
                  //Luchador 2
                 lbl_nombrePersonaje2.setText(nombreLuchador1);
                 destruida1=totales1-vivas1; 
                 lbl_casillasDest2.setText(destruida1+" de "+totales1);
-                porcentaje1=(vivas1/totales1)*100;
-                lbl_vida2.setText("Porcentaje: "+Integer.toString(porcentaje1));
+                if(vivas1>0){
+                    porcentaje1=(vivas1*100)/totales1;
+                    lbl_vida2.setText("Porcentaje: "+porcentaje1);
+                }else{
+                   lbl_vida2.setText("Porcentaje: 0");
+                }
             break;    
             case 2:
                 //Luchador 3
                 lbl_nombrePersonaje3.setText(nombreLuchador1);
                 destruida1=totales1-vivas1;
                 lbl_casillasDest3.setText(destruida1+" de "+totales1);
-                porcentaje1=(vivas1/totales1)*100;
-                lbl_vida3.setText("Porcentaje: "+Integer.toString(porcentaje1));
+                if(vivas1>0){
+                    porcentaje1=(vivas1*100)/totales1;
+                    lbl_vida3.setText("Porcentaje: "+porcentaje1);
+                }else{
+                   lbl_vida3.setText("Porcentaje: 0");
+                }
             break;    
             default:
         }
@@ -321,11 +337,21 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     }
     public void verificarListo(){
         String datosTxt=txtArea_Escribir.getText();
-        System.out.println(contadorPersonajes);
         try {
             refCliente.hiloCliente.writer.writeInt(8); //Hay que comentar esta línea en generarPersonajes()
+            refCliente.hiloCliente.writer.writeUTF(datosTxt); 
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void atacar(){
+        String datosTxt=txtArea_Escribir.getText();
+        System.out.println(contadorPersonajes);
+        try {
+            refCliente.hiloCliente.writer.writeInt(10); 
             refCliente.hiloCliente.writer.writeUTF(datosTxt);
-            refCliente.hiloCliente.writer.writeInt(contadorPersonajes); 
         } catch (IOException ex) {
             Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -394,7 +420,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txta_ataques = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea_Escribir = new javax.swing.JTextArea();
@@ -698,7 +724,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_casillasDest3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_casillasDest2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_vida2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(63, 63, 63)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,7 +732,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_casillasDest2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_casillasDest3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_vida3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(62, 62, 62))
         );
@@ -740,6 +766,7 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(247, 329));
 
         txArea_bitacora.setColumns(20);
+        txArea_bitacora.setLineWrap(true);
         txArea_bitacora.setRows(5);
         jScrollPane4.setViewportView(txArea_bitacora);
 
@@ -771,9 +798,10 @@ public class SeasWarPantalla extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jPanel4.setPreferredSize(new java.awt.Dimension(247, 331));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txta_ataques.setColumns(20);
+        txta_ataques.setLineWrap(true);
+        txta_ataques.setRows(5);
+        jScrollPane3.setViewportView(txta_ataques);
 
         jLabel2.setText("Resultados de los ataques");
 
@@ -913,6 +941,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 enviarMensaje();
             }else if(datos[0].trim().equals("LISTO")){
                 verificarListo();
+            }else if(datos[0].trim().equals("ATTACK")){
+                atacar();
             }else{
                 try {
                     refCliente.hiloCliente.writer.writeInt(4);
@@ -976,7 +1006,6 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_casillasDest1;
     private javax.swing.JLabel lbl_casillasDest2;
     private javax.swing.JLabel lbl_casillasDest3;
@@ -1013,5 +1042,6 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     private javax.swing.JLabel txt_valor1;
     private javax.swing.JLabel txt_valor2;
     private javax.swing.JLabel txt_valor3;
+    private javax.swing.JTextArea txta_ataques;
     // End of variables declaration//GEN-END:variables
 }
