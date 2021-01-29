@@ -139,18 +139,19 @@ class ThreadServidor extends Thread{
                                 current.writer.writeUTF(mensajeRetorno7);
                             }
                             }else{
+                            String nombreMen = nombre;
                             for(int i=0; i<juegoActual.getJugadores().size();i++){
                                 if(datosMensaje[1].equals(juegoActual.getJugadores().get(i).getNombreUsuario())){
-                                    nombre = jugadorActual.getNombreUsuario()+" (individual)";
+                                    nombreMen = jugadorActual.getNombreUsuario()+" (individual)";
                                     ThreadServidor current = server.conexiones.get(i);
                                     current.writer.writeInt(8);
-                                    current.writer.writeUTF(nombre);
+                                    current.writer.writeUTF(nombreMen);
                                     current.writer.writeUTF(mensajeRetorno7);
                                 }else if(juegoActual.getJugadores().get(i).getNombreUsuario().equals(jugadorActual.getNombreUsuario())){
-                                    nombre = jugadorActual.getNombreUsuario()+" (individual para "+datosMensaje[1]+")";
+                                    nombreMen = jugadorActual.getNombreUsuario()+" (individual para "+datosMensaje[1]+")";
                                     ThreadServidor current = server.conexiones.get(i);
                                     current.writer.writeInt(8);
-                                    current.writer.writeUTF(nombre);
+                                    current.writer.writeUTF(nombreMen);
                                     current.writer.writeUTF(mensajeRetorno7);
                                 }
                             }
