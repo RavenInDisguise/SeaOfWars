@@ -52,7 +52,8 @@ public class VolcanoExplosion implements IAtacar{
                            int porcentaje=jugadorActual.casillas[i][j].porcentajeVida;
                            jugadorActual.casillas[i][j].porcentajeVida-=20;
                            String datosCasilla="Casilla"+"["+i+"]"+"["+j+"]:"+" fue afectado por una piedra del volcán. Su porcentaje de vida de: "+porcentaje+" pasa a: "+jugadorActual.casillas[i][j].porcentajeVida+"\n";
-                           jugadorActual.casillas[i][j].historialAtaques+=datosCasilla;
+                           jugadorActual.casillas[i][j].historialAtaquesTotales+=datosCasilla;
+                           jugadorActual.casillas[i][j].historialAtaques=datosCasilla;
                            jugadorActual.setLogJugadorRecibido(datosCasilla);
                            jugadorActual.casillas[i][j].ataqueReciente=true;
                        }

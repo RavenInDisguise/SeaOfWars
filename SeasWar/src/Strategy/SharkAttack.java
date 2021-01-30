@@ -43,7 +43,8 @@ public class SharkAttack implements IAtacar {
                         int porcentajeActual = jugadorActual.casillas[x][y].porcentajeVida;
                         jugadorActual.casillas[x][y].porcentajeVida-=33;
                         String datosCasilla="Casilla"+"["+x+"]"+"["+y+"]:"+" tiene un tiburón. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[x][y].porcentajeVida+".\n";
-                        jugadorActual.casillas[x][y].historialAtaques+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaquesTotales+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaques=datosCasilla;
                         jugadorActual.setLogJugadorRecibido(datosCasilla);
                         jugadorActual.casillas[x][y].ataqueReciente=true;
                     }
@@ -59,7 +60,8 @@ public class SharkAttack implements IAtacar {
                         int porcentajeActual = jugadorActual.casillas[x][y].porcentajeVida;
                         jugadorActual.casillas[x][y].porcentajeVida-=33;
                         String datosCasilla="Casilla"+"["+x+"]"+"["+y+"]:"+" tiene un tiburón. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[x][y].porcentajeVida+".\n";
-                        jugadorActual.casillas[x][y].historialAtaques+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaquesTotales+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaques=datosCasilla;
                         jugadorActual.setLogJugadorRecibido(datosCasilla);
                         jugadorActual.casillas[x][y].ataqueReciente=true;
                     }
@@ -75,7 +77,8 @@ public class SharkAttack implements IAtacar {
                         int porcentajeActual = jugadorActual.casillas[x][y].porcentajeVida;
                         jugadorActual.casillas[x][y].porcentajeVida-=33;
                         String datosCasilla="Casilla"+"["+x+"]"+"["+y+"]:"+" tiene un tiburón. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[x][y].porcentajeVida+".\n";
-                        jugadorActual.casillas[x][y].historialAtaques+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaquesTotales+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaques=datosCasilla;jugadorActual.casillas[x][y].historialAtaques+=datosCasilla;
                         jugadorActual.setLogJugadorRecibido(datosCasilla);
                         jugadorActual.casillas[x][y].ataqueReciente=true;
                     }
@@ -91,7 +94,8 @@ public class SharkAttack implements IAtacar {
                         int porcentajeActual = jugadorActual.casillas[x][y].porcentajeVida;
                         jugadorActual.casillas[x][y].porcentajeVida-=33;
                         String datosCasilla="Casilla"+"["+x+"]"+"["+y+"]:"+" tiene un tiburón. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[x][y].porcentajeVida+".\n";
-                        jugadorActual.casillas[x][y].historialAtaques+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaquesTotales+=datosCasilla;
+                        jugadorActual.casillas[x][y].historialAtaques=datosCasilla;
                         jugadorActual.setLogJugadorRecibido(datosCasilla);
                         jugadorActual.casillas[x][y].ataqueReciente=true;
                     }

@@ -40,7 +40,8 @@ public class PoseidonThunders implements IAtacar {
                      if(j<30 && j>-1){
                         if(jugadorActual.casillas[i][j].porcentajeVida>0){
                            String datosCasilla="Casilla"+"["+i+"]"+"["+j+"]:"+" fue afectado por un rayo de Poseidon. Su porcentaje de vida de: "+jugadorActual.casillas[i][j].porcentajeVida+" pasa a: 0.\n";
-                           jugadorActual.casillas[i][j].historialAtaques+=datosCasilla;
+                           jugadorActual.casillas[i][j].historialAtaquesTotales+=datosCasilla;
+                            jugadorActual.casillas[i][j].historialAtaques=datosCasilla;
                            jugadorActual.setLogJugadorRecibido(datosCasilla);
                            jugadorActual.casillas[i][j].porcentajeVida=0;
                            jugadorActual.casillas[i][j].ataqueReciente=true;

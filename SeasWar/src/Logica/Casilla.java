@@ -14,6 +14,7 @@ import javax.swing.JButton;
 public class Casilla {
     public int porcentajeVida=100;
     public String historialAtaques = "";
+    public String historialAtaquesTotales = "";
     public String color;
     public Luchador luchadorRepresentado;
     public JButton refBoton;

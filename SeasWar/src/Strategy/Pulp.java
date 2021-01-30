@@ -26,7 +26,8 @@ public class Pulp implements IAtacar {
                     int porcentajeActual = jugadorActual.casillas[irandom][jrandom].porcentajeVida;
                     jugadorActual.casillas[irandom][jrandom].porcentajeVida-=25;
                     String datosCasilla="Casilla"+"["+irandom+"]"+"["+jrandom+"]:"+" tiene un tentáculo de un pulpo. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[irandom][jrandom].porcentajeVida+".\n";
-                    jugadorActual.casillas[irandom][jrandom].historialAtaques+=datosCasilla;
+                    jugadorActual.casillas[irandom][jrandom].historialAtaquesTotales+=datosCasilla;
+                    jugadorActual.casillas[irandom][jrandom].historialAtaques=datosCasilla;
                     jugadorActual.setLogJugadorRecibido(datosCasilla);
                     jugadorActual.casillas[irandom][jrandom].ataqueReciente=true;
                 }

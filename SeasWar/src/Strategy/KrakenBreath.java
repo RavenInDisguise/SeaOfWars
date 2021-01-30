@@ -32,7 +32,8 @@ public class KrakenBreath implements IAtacar{
                         if(jugadorActual.casillas[i][jrandom].porcentajeVida>0){
                             System.out.println("case 1");
                             String datosCasilla="Casilla"+"["+i+"]"+"["+jrandom+"]:"+" estaba en el paso del aliento del Kraken. Su porcentaje de vida de: "+jugadorActual.casillas[i][jrandom].porcentajeVida+" pasa a: 0.\n";
-                            jugadorActual.casillas[i][jrandom].historialAtaques+=datosCasilla;
+                            jugadorActual.casillas[irandom][jrandom].historialAtaquesTotales+=datosCasilla;
+                            jugadorActual.casillas[irandom][jrandom].historialAtaques=datosCasilla;
                             jugadorActual.setLogJugadorRecibido(datosCasilla);
                             jugadorActual.casillas[i][jrandom].porcentajeVida=0;
                             jugadorActual.casillas[i][jrandom].ataqueReciente=true;

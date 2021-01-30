@@ -43,7 +43,8 @@ public class ThreeLines implements IAtacar{
                     if(i<20 && i>-1){
                         if(jugadorActual.casillas[i][jValor].porcentajeVida>0){
                             String datosCasilla="Casilla"+"["+i+"]"+"["+jValor+"]:"+" estaba en las líneas de Poseidon. Su porcentaje de vida de: "+jugadorActual.casillas[i][jValor].porcentajeVida+" pasa a: 0.\n";
-                            jugadorActual.casillas[i][jValor].historialAtaques+=datosCasilla;
+                            jugadorActual.casillas[i][jValor].historialAtaquesTotales+=datosCasilla;
+                            jugadorActual.casillas[i][jValor].historialAtaques=datosCasilla;
                             jugadorActual.setLogJugadorRecibido(datosCasilla);
                             jugadorActual.casillas[i][jValor].porcentajeVida=0;
                             jugadorActual.casillas[i][jValor].ataqueReciente=true;
@@ -56,6 +57,7 @@ public class ThreeLines implements IAtacar{
                     if(i<20 && i>-1){
                         if(jugadorActual.casillas[i][jValor].porcentajeVida>0){
                             String datosCasilla="Casilla"+"["+i+"]"+"["+jValor+"]:"+" estaba en las líneas de Poseidon. Su porcentaje de vida de: "+jugadorActual.casillas[i][jValor].porcentajeVida+" pasa a: 0.\n";
+                            jugadorActual.casillas[i][jValor].historialAtaquesTotales+=datosCasilla;
                             jugadorActual.casillas[i][jValor].historialAtaques=datosCasilla;
                             jugadorActual.setLogJugadorRecibido(datosCasilla);
                             jugadorActual.casillas[i][jValor].porcentajeVida=0;
@@ -69,7 +71,8 @@ public class ThreeLines implements IAtacar{
                     if(j<30 && j>-1){
                         if(jugadorActual.casillas[iValor][j].porcentajeVida>0){
                             String datosCasillas="Casilla"+"["+iValor+"]"+"["+j+"]:"+" estaba en las líneas de Poseidon. Su porcentaje de vida de: "+jugadorActual.casillas[iValor][j].porcentajeVida+" pasa a: 0.\n";
-                            jugadorActual.casillas[iValor][j].historialAtaques+=datosCasillas;
+                            jugadorActual.casillas[iValor][j].historialAtaquesTotales+=datosCasillas;
+                            jugadorActual.casillas[iValor][j].historialAtaques=datosCasillas;
                             jugadorActual.setLogJugadorRecibido(datosCasillas);
                             jugadorActual.casillas[iValor][j].porcentajeVida=0;
                             jugadorActual.casillas[iValor][j].ataqueReciente=true;
@@ -82,7 +85,8 @@ public class ThreeLines implements IAtacar{
                     if(j<30 && j>-1){
                         if(jugadorActual.casillas[iValor][j].porcentajeVida>0){
                             String datosCasillas="Casilla"+"["+iValor+"]"+"["+j+"]:"+" estaba en las líneas de Poseidon. Su porcentaje de vida de: "+jugadorActual.casillas[iValor][j].porcentajeVida+" pasa a: 0.\n";
-                            jugadorActual.casillas[iValor][j].historialAtaques+=datosCasillas;
+                            jugadorActual.casillas[iValor][j].historialAtaquesTotales+=datosCasillas;
+                            jugadorActual.casillas[iValor][j].historialAtaques=datosCasillas;
                             jugadorActual.setLogJugadorRecibido(datosCasillas);
                             jugadorActual.casillas[iValor][j].ataqueReciente=true;
                         }
