@@ -113,17 +113,9 @@ public class Luchador{
 
     public void asignarAtaques(String ataque){ 
         ataque=ataque.toUpperCase().trim();
-        if(ataque.equals("SANIDAD")){ 
-            
-        }else if(ataque.equals("RESISTENCIA")){
-        
-        }else if(ataque.equals("FUERZA")){
-            
-        }else{
-            if(null == this.Grupo.toLowerCase()){
+        if(null == this.Grupo.toLowerCase()){
                 System.out.println("No existe tal grupo.");
-            }else
-            OUTER:
+            }else{
             switch (this.Grupo.toLowerCase()) {
                 case "thunders under the sea":
                     switch (ataque) {
@@ -135,7 +127,6 @@ public class Luchador{
                             break;
                         default: //EEL ATTACK
                             iataque=new EelAttack();
-                            break;
                         }
                     break;
                 case "fish telepathy":
@@ -148,7 +139,6 @@ public class Luchador{
                             break;
                         default: //PULP
                             iataque=new Pulp();
-                            break;
                     }
                     break;
                 case "release the kraken":
@@ -178,7 +168,6 @@ public class Luchador{
                         case "CONTROL THE KRAKEN":
                             iataque=new ControlKraken();
                         default:
-                            break;
                     }
                 case "undersea volcanoes":
                     switch (ataque) {
