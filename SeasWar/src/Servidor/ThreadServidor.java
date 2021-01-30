@@ -206,6 +206,7 @@ class ThreadServidor extends Thread{
                             current.writer.writeUTF(mensajeRetorno5);
                             current.writer.writeInt(4);
                             current.writer.writeUTF("Turno de ataque: "+siguiente2);
+                        }
                     break;
                     case 10:
                         String datos3=reader.readUTF();
