@@ -206,14 +206,12 @@ class ThreadServidor extends Thread{
                             current.writer.writeUTF(mensajeRetorno5);
                             current.writer.writeInt(4);
                             current.writer.writeUTF("Turno de ataque: "+siguiente2);
-                        }
                     break;
                     case 10:
                         String datos3=reader.readUTF();
                         String[] datosArray3=splitCommands(datos3);
                         String mensajeRetorno3="";
                         String historialAtaque="";
-                        System.out.println(datosArray3[0]);
                         ICommand command3=manager.getCommand(datosArray3[0].trim()); 
                         if (jugadorActual.isTurno()){ //Si es el turno del jugador
                             for(int i=0; i<server.conexiones.size();i++){ //Busca el jugador a Atacar

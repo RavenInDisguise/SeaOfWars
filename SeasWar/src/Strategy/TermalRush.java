@@ -29,7 +29,6 @@ public class TermalRush implements IAtacar{
                 if(jugadorActual.casillas[i][j].volcan){
                     int segundos=(int) Math.floor(Math.random()*(5-6+1)+6);
                     recorrerMatriz(i, j, segundos,jugadorActual);
-                    
                 }
             }
     

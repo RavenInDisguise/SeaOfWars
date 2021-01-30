@@ -389,7 +389,6 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     public void enviarCaracteristica(){
         String commandName=txtArea_Escribir.getText(); 
         try {
