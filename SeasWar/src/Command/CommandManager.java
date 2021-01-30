@@ -21,7 +21,7 @@ public class CommandManager {
         registCommand(Rendirse.COMMAND_NAME, Rendirse.class);
         registCommand(SaltarTurno.COMMAND_NAME, SaltarTurno.class);
         registCommand(CaracteristicaCommand.COMMAN_NAME, CaracteristicaCommand.class);
-
+        registCommand(ConsultarCelda.COMMAND_NAME, ConsultarCelda.class);
     }       
     
     public static synchronized CommandManager getIntance() {           

@@ -357,6 +357,18 @@ class ThreadServidor extends Thread{
                                 }
                         
                      break;
+                     case 16:
+                        String datos16=reader.readUTF();
+                        String[] datosArray16=splitCommands(datos16);
+                        ICommand command16=manager.getCommand(datosArray16[0].trim());  
+                        String mensajeRetorno16=command16.execute(datos16, jugadorActual);
+                        for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF(mensajeRetorno16);
+                        }
+                        
+                     break;    
                     default:
                     
                 }

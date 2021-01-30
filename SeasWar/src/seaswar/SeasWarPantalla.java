@@ -420,6 +420,16 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void consultarCelda(){
+        String commandName=txtArea_Escribir.getText(); 
+        try {
+            refCliente.hiloCliente.writer.writeInt(16);
+            refCliente.hiloCliente.writer.writeUTF(commandName);
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1006,6 +1016,8 @@ public class SeasWarPantalla extends javax.swing.JFrame {
                 rendirJugador();
             }else if(datos[0].trim().equals("CARACTERISTICA")){  
                 enviarCaracteristica();
+            }else if(datos[0].trim().equals("CONSULTARCELDA")){   
+                 consultarCelda();   
             }else{
                 try {
                     refCliente.hiloCliente.writer.writeInt(4);
