@@ -18,6 +18,8 @@ public class CommandManager {
         registCommand(MensajeCommand.COMMAN_NAME, MensajeCommand.class);
         registCommand(ListoCommand.COMMAN_NAME, ListoCommand.class);
         registCommand(EnviarNum.COMMAN_NAME, EnviarNum.class);
+        registCommand(Rendirse.COMMAND_NAME, Rendirse.class);
+        registCommand(SaltarTurno.COMMAND_NAME, SaltarTurno.class);
     }       
     
     public static synchronized CommandManager getIntance() {           

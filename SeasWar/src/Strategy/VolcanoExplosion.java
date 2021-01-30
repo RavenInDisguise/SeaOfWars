@@ -31,11 +31,7 @@ public class VolcanoExplosion implements IAtacar{
     public void generarPiedras(int piedras, Casilla casillaActual, Jugador jugadorActual){
         Random rand = new Random();
         for(int i=0; i<piedras;i++){
-            int radio = rand.nextInt(11);
-            if(radio==0){
-                radio=1;
-            }
-            int radioPiedras=casillaActual.radioVolcan*radio;
+            int radioPiedras=casillaActual.radioVolcan*10;
             int irandom = rand.nextInt(20);
             int jrandom = rand.nextInt(30);
             generarRadio(radioPiedras, irandom, jrandom, jugadorActual);

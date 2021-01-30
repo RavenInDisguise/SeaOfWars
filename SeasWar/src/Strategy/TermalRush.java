@@ -29,7 +29,6 @@ public class TermalRush implements IAtacar{
                 if(jugadorActual.casillas[i][j].volcan){
                     int segundos=(int) Math.floor(Math.random()*(5-6+1)+6);
                     recorrerMatriz(i, j, segundos,jugadorActual);
-                    
                 }
             }
     
@@ -59,7 +58,7 @@ public class TermalRush implements IAtacar{
                 casilla.porcentajeVida-=5;
                 String datosCasilla="Casilla"+"["+i+"]"+"["+j+"]:"+" fue afectada por un sobrecalentamiento de agua. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[i][j].porcentajeVida+".\n";
                 casilla.historialAtaquesTotales+=datosCasilla;
-                casilla.historialAtaques+=datosCasilla;
+                casilla.historialAtaques=datosCasilla;
                 jugadorActual.setLogJugadorRecibido(datosCasilla);
                 jugadorActual.casillas[i][j].ataqueReciente=true;
             }

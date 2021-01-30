@@ -188,15 +188,31 @@ class ThreadServidor extends Thread{
                             }
                         }
                     break;
-                    case 9: 
-                        
+                    case 9:
+                        String datos6=reader.readUTF();
+                        String mensajeRetorno5="";
+                        ICommand command5=manager.getCommand("SALTARTURNO"); 
+                        mensajeRetorno5=command5.execute(datos6, jugadorActual);
+                        turnoSiguiente();
+                        String siguiente2="";
+                        for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){ //Hace los turnos
+                            if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                                siguiente2=juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                            }
+                        }
+                        for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF("Turno de ataque: "+siguiente2);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF(mensajeRetorno5);
+                        }
                     break;
                     case 10:
                         String datos3=reader.readUTF();
                         String[] datosArray3=splitCommands(datos3);
                         String mensajeRetorno3="";
                         String historialAtaque="";
-                        System.out.println(datosArray3[0]);
                         ICommand command3=manager.getCommand(datosArray3[0].trim()); 
                         if (jugadorActual.isTurno()){ //Si es el turno del jugador
                             for(int i=0; i<server.conexiones.size();i++){ //Busca el jugador a Atacar
@@ -292,7 +308,23 @@ class ThreadServidor extends Thread{
                         mensajeRetorno4+=command4.execute(numero,atacante);
                         mensajeRetorno4+=command4.execute(numero,atacado);
                         
-                    break;    
+                    break; 
+                    case 14:
+                        String datos8=reader.readUTF();
+                        String mensajeRetorno10="";
+                        ICommand command10=manager.getCommand("RENDIRSE"); 
+                        mensajeRetorno10=command10.execute(datos8, jugadorActual);
+                        for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF(mensajeRetorno10);
+                        }
+                        for(int j=0; j<juegoActual.getJugadores().size();j++){
+                            if(juegoActual.getJugadores().get(j).getNombreUsuario().trim().toUpperCase().equals(jugadorActual.getNombreUsuario().trim().toUpperCase())){
+                                    juegoActual.getJugadores().remove(j);
+                            }
+                        }
+                     break;    
                     default:
                 }
             } catch (IOException ex) {
