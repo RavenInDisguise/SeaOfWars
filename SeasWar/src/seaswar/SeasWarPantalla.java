@@ -78,6 +78,9 @@ public class SeasWarPantalla extends javax.swing.JFrame {
     public void addMensaje(String msj){
         txtArea_Command.append(msj + "\n");
     }  
+    public void mostrarGanador(String msj){
+        JOptionPane.showMessageDialog(null,msj,"Partida terminada",JOptionPane.INFORMATION_MESSAGE,null);
+    } 
     
     public void addBitacora(String msj){
         txArea_bitacora.append(msj + "\n");

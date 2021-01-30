@@ -78,7 +78,8 @@ public class ThreadCliente extends Thread{
                         refPantalla.addAtaque(historial);
                     break;  
                     case 10: 
-                        
+                        String ganador = reader.readUTF();
+                        refPantalla.mostrarGanador(ganador);
                     break;    
                     default:
                 }

@@ -243,7 +243,18 @@ class ThreadServidor extends Thread{
                                      current.writer.writeInt(9);
                                      current.writer.writeUTF(historialAtaque);
                                 }
-
+                                boolean ganador = revisarGanador();
+                                if (ganador){
+                                    for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){
+                                        if(juegoActual.getJugadoresTurnados().get(i).vivo){
+                                            for(int j=0; j<server.conexiones.size();j++){ //Muestra los turnos
+                                            ThreadServidor current = server.conexiones.get(i);
+                                            current.writer.writeInt(10);
+                                            current.writer.writeUTF("Ganador: "+juegoActual.getJugadoresTurnados().get(i).getNombreUsuario());
+                                            }
+                                        }
+                                    }
+                                }
                                 turnoSiguiente();
                                 String siguiente="";
                                 for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){ //Hace los turnos
@@ -443,4 +454,35 @@ class ThreadServidor extends Thread{
         }
         }
         
+    public boolean revisarGanador(){
+        for(int i=0; i<juegoActual.getJugadores().size();i++){
+            juegoActual.getJugadores().get(i).vivo = revisarCasillas(juegoActual.getJugadores().get(i));
+            System.out.println("Vivo: "+juegoActual.getJugadores().get(i).getNombreUsuario()+" - "+juegoActual.getJugadores().get(i).vivo);
+            if(juegoActual.getJugadores().get(i).vivo==false){
+                juegoActual.contVivos-=1;
+            }
+            if(juegoActual.contVivos == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean revisarCasillas(Jugador jugador){
+        for (int i = 0; i <20; i++){
+            for (int j = 0; j <30; j++){ 
+                if(jugador.casillas[i][j].porcentajeVida>0){
+                    return true;
+                }
+            }
+        }
+        jugador.turno=false;
+        for(int i=0; i<juegoActual.jugadoresTurnados.size();i++){
+            if(juegoActual.jugadoresTurnados.get(i).getNombreUsuario().equals(jugador.getNombreUsuario())){
+                juegoActual.jugadoresTurnados.remove(i);
+                return false;
+            }
+        }
+        return false;
+    }
 }
