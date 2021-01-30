@@ -14,27 +14,55 @@ import Logica.Jugador;
  */
 public class AttackCommand implements ICommand{
     public static final String COMMAND_NAME = "ATTACK"; 
+    Jugador atacante;
+    int contador=0;
     @Override
     public String getCommandName() {
         return COMMAND_NAME;   
     }
 
-    @Override
     public String execute(String datos, Jugador jugador) {
-        String datosArray[]=splitCommands(datos);
-        for(int i=0; i<jugador.getLuchadores().size();i++){
-                jugador.getLuchadores().get(i).asignarAtaques(datosArray[3]);
-                jugador.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
+        if(contador==0){
+            this.atacante=jugador;
+            System.out.println(atacante.getNombreUsuario());
+            contador++;
+        }else{
+            String datosArray[]=splitCommands(datos);
+            System.out.println(jugador.getNombreUsuario());
+            for(int i=0; i<atacante.getLuchadores().size();i++){
+                    System.out.println(jugador.getNombreUsuario());
+                    System.out.println(datosArray[3]);
+                    if(atacante.getLuchadores().get(i).getNombreLuchador().trim().toUpperCase().equals(datosArray[1].trim().toUpperCase())){
+                        if(datosArray[3].equals("CONTROL THE KRAKEN")){
+                            if(atacante.isAtacadoRelease()){
+                                atacante.getLuchadores().get(i).asignarAtaques(datosArray[3]);
+                                atacante.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
+                                atacante.setAtacadoRelease(false);
+                            }     
+                        }else{
+                            atacante.getLuchadores().get(i).asignarAtaques(datosArray[3]);
+                            atacante.getLuchadores().get(i).getIataque().atacarCasillas(jugador, datosArray);
+                    
+                        }
+                    }
+            }
+            contador=0;
+            return "Ataque ejecutado a: "+datosArray[2];    
         }
-        return "Ataque ejecutado a: "+datosArray[2];
-        
+        return "";
     }
 
     @Override
     public String mostrarInstrucciones() {
-        String instrucciones="Release the kraken:"
-                + "-Tentaculos: "
-                +"-Kraken breath: Escriba un x,y para que se destruyan de 1 a 8 casillas en alguna direccion.";
+        String instrucciones="Release the kraken:\n"
+                +"-Tentaculos: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE\n"
+                +"-Kraken breath: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE\n"
+                +"-Release the kraken: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE\n"
+                +"The trident:\n"
+                +"-Three lines: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE-X1-Y1-X2-Y2-X3-Y3\n"
+                +"-Three numbers: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE-NUM1-NUM2-NUM3\n"
+                +"-Control the kraken: ATTACK-NOMBRE PERSONAJE-PERSONA A ATACAR-TIPO DE ATAQUE\n";
+
         return instrucciones;
        
     }

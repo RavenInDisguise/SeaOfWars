@@ -369,6 +369,26 @@ public class SeasWarPantalla extends javax.swing.JFrame {
        
         txtArea_Escribir.setText("");
     }
+    
+    public void pedirNumeros(){
+        String commandName=txtArea_Escribir.getText(); 
+        try {
+            refCliente.hiloCliente.writer.writeInt(11);
+            refCliente.hiloCliente.writer.writeUTF(commandName);
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void enviarNumeros(){
+        String commandName=txtArea_Escribir.getText(); 
+        try {
+            refCliente.hiloCliente.writer.writeInt(12);
+            refCliente.hiloCliente.writer.writeUTF(commandName);
+        } catch (IOException ex) {
+            Logger.getLogger(SeasWarPantalla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -942,7 +962,13 @@ public class SeasWarPantalla extends javax.swing.JFrame {
             }else if(datos[0].trim().equals("LISTO")){
                 verificarListo();
             }else if(datos[0].trim().equals("ATTACK")){
-                atacar();
+                if(datos[3].trim().equals("THREE NUMBERS")){
+                    pedirNumeros();
+                }else{
+                    atacar();
+                }
+            }else if(datos[0].trim().equals("ENVIARNUM")){  
+                enviarNumeros();
             }else{
                 try {
                     refCliente.hiloCliente.writer.writeInt(4);

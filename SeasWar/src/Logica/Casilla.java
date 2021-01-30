@@ -12,14 +12,15 @@ import javax.swing.JButton;
  * @author Jennifer
  */
 public class Casilla {
-    public int porcentajeVida =100;
+    public int porcentajeVida=100;
     public String historialAtaques = "";
     public String color;
     public Luchador luchadorRepresentado;
     public JButton refBoton;
     public int x;
     public int y;
-    public boolean tentaculo=false;
+    public boolean volcan=false;
+    public int radioVolcan=0;
     public boolean ataqueReciente=false;
 
     public Casilla(String historialAtaques, String color, Luchador luchadorRepresentado, JButton refBoton, int x, int y) {

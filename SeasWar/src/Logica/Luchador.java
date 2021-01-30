@@ -5,9 +5,15 @@
  */
 package Logica;
 
+import Strategy.ControlKraken;
 import Strategy.IAtacar;
+import Strategy.KrakenBreath;
 import Strategy.ReleaseKraken;
 import Strategy.Tentaculos;
+import Strategy.ThreeLines;
+import Strategy.ThreeNumbers;
+import Strategy.VolcanoExplosion;
+import Strategy.VolcanoRaising;
 
 /**
  *
@@ -99,7 +105,7 @@ public class Luchador{
     }
 
     public void asignarAtaques(String ataque){ 
-        ataque=ataque.toUpperCase();
+        ataque=ataque.toUpperCase().trim();
         if(ataque.equals("SANIDAD")){ 
             
         }else if(ataque.equals("RESISTENCIA")){
@@ -109,7 +115,9 @@ public class Luchador{
         }else{
             if(null == this.Grupo.toLowerCase()){
                 System.out.println("No existe tal grupo.");
-            }else switch (this.Grupo.toLowerCase()) {
+            }else
+            OUTER:
+            switch (this.Grupo.toLowerCase()) {
                 case "thunders under the sea":
 
                     break;
@@ -117,22 +125,47 @@ public class Luchador{
                     
                     break;
                 case "release the kraken":
-                    if(ataque.equals("TENTACULOS")){
-                        iataque=new Tentaculos();
-                    }else if(ataque.equals("KRAKEN BREATH")){
-                        
-                    }else{
-                        
+                    switch (ataque) {
+                        case "TENTACULOS":
+                            iataque=new Tentaculos();
+                            break;
+                        case "KRAKEN BREATH":
+                            iataque=new KrakenBreath();
+                            break;
+                        case "RELEASE THE KRAKEN":
+                            iataque=new ReleaseKraken();
+                            break;
+                        default:
                     }
-                    break;
                 case "waves control":
 
                     break;
                 case "the trident":
-
-                    break;
+                    switch (ataque) {
+                        case "THREE LINES":
+                            iataque=new ThreeLines();
+                            break;
+                        case "THREE NUMBERS":
+                            iataque=new ThreeNumbers();
+                            break;
+                        case "CONTROL THE KRAKEN":
+                            iataque=new ControlKraken();
+                        default:
+                            break;
+                    }
                 case "undersea volcanoes":
-
+                    switch (ataque) {
+                        case "VOLCANO RAISING":
+                            iataque=new VolcanoRaising();
+                            break;
+                        case "VOLCANO EXPLOSION":
+                            iataque=new VolcanoExplosion();
+                            break;
+                        case "TERMAL RUSH":
+                            //iataque=new ControlKraken();
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     System.out.println("No existe tal grupo.");

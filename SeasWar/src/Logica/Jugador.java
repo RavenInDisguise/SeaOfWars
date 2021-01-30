@@ -16,11 +16,47 @@ public class Jugador {
     protected String logJugadorRecibido="Ataques recibidos: \n";
     protected String logJugadorEnviado="Ataques enviados: \n";
     protected ArrayList<Luchador> luchadores=new ArrayList<>();
+    protected ArrayList<Integer> numeros=new ArrayList<>();
     public Casilla [][]casillas = new Casilla[20][30];
+    public boolean atacadoRelease=false;
     public boolean turno = false;
+    public boolean atacante=false;
+    public boolean atacado=false;
     
     public Jugador(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public boolean isAtacadoRelease() {
+        return atacadoRelease;
+    }
+
+    public void setAtacadoRelease(boolean atacadoRelease) {
+        this.atacadoRelease = atacadoRelease;
+    }
+    
+    public boolean isAtacado() {
+        return atacado;
+    }
+
+    public void setAtacado(boolean atacado) {
+        this.atacado = atacado;
+    }
+
+    public ArrayList<Integer> getNumeros() {
+        return numeros;
+    }
+
+    public boolean isAtacante() {
+        return atacante;
+    }
+
+    public void setAtacante(boolean atacante) {
+        this.atacante = atacante;
+    }
+
+    public void setNumeros(ArrayList<Integer> numeros) {
+        this.numeros = numeros;
     }
 
     public boolean isTurno() {
@@ -36,7 +72,7 @@ public class Jugador {
     }
 
     public void setLogJugadorEnviado(String logJugadorEnviado) {
-        this.logJugadorEnviado = logJugadorEnviado;
+        this.logJugadorEnviado += logJugadorEnviado;
     }
 
     public String getLogJugadorRecibido() {
@@ -97,7 +133,6 @@ public class Jugador {
   
      for(int r=0; r<20; r++){
         for(int c=0; c<30; ){
-            System.out.println("ewe");
             casillas[r][c] = new Casilla("","blanco",null,null,r,c);
             int caso = (int) (Math.random() * 3) + 1;
             switch (caso) {

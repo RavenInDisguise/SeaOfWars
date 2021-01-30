@@ -93,7 +93,7 @@ class ThreadServidor extends Thread{
                         writer.writeInt(4);
                         writer.writeUTF(mensajeRetorno2);
                     break;
-                    case 5:  //Cargar matriz
+                    case 5: //Cargar matriz
                         try {
                             jugadorActual.generarMatrizCasillas(jugadorActual.getLuchadores().get(0),jugadorActual.getLuchadores().get(1),jugadorActual.getLuchadores().get(2));
                             for (int i = 0; i <20; i++){ // El primer índice recorre las filas.
@@ -195,15 +195,18 @@ class ThreadServidor extends Thread{
                         String[] datosArray3=splitCommands(datos3);
                         String mensajeRetorno3="";
                         String historialAtaque="";
+                        System.out.println(datosArray3[0]);
                         ICommand command3=manager.getCommand(datosArray3[0].trim()); 
                         if (jugadorActual.isTurno()){ //Si es el turno del jugador
                             for(int i=0; i<server.conexiones.size();i++){ //Busca el jugador a Atacar
                                 ThreadServidor current = server.conexiones.get(i);
                                 if(current.jugadorActual.getNombreUsuario().trim().toUpperCase().equals(datosArray3[2].trim().toUpperCase())){
                                     mensajeRetorno3="Ataque ejecutado por: "+nombre+"\n";
+                                    mensajeRetorno3+=command3.execute(datos3, jugadorActual);
                                     mensajeRetorno3+=command3.execute(datos3, current.jugadorActual);
                                     historialAtaque+=recorrerCasillas(current.jugadorActual);
                                     jugadorActual.setLogJugadorEnviado(historialAtaque);
+                                    //current.jugadorActual.setLogJugadorRecibido(historialAtaque);
                                     for(int j=0; j<current.jugadorActual.getLuchadores().size();j++){ //Busca las casillas afectadas y las actualiza
                                         int casillasVivas1=calcularCasillas(current.jugadorActual.getLuchadores().get(j),juegoActual.getJugadores().get(i));
                                         int casillasTotales1=calcularCasillasTotales(current.jugadorActual.getLuchadores().get(j), juegoActual.getJugadores().get(i));
@@ -238,8 +241,57 @@ class ThreadServidor extends Thread{
                             }else{
                                 writer.writeInt(4);
                                 writer.writeUTF("NO puede atacar. No es su turno.");
-                        }
+                            }
                     break;
+                    case 11:
+                        String datos4=reader.readUTF();
+                        String[] datosArray4=splitCommands(datos4);
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray4[4]));
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray4[5]));
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray4[6]));
+                        jugadorActual.setAtacante(true);
+                        for(int i=0; i<server.conexiones.size();i++){ 
+                            ThreadServidor current = server.conexiones.get(i);
+                            if(current.jugadorActual.getNombreUsuario().trim().toUpperCase().equals(datosArray4[2].trim().toUpperCase())){
+                               current.writer.writeInt(3);
+                               current.writer.writeUTF("Ingrese tres numeros con el comando EnviarNum.\n");
+                            }
+                        }
+                    break;   
+                    case 12:
+                        jugadorActual.setAtacado(true);
+                        String datos5=reader.readUTF();
+                        String[] datosArray5=splitCommands(datos5);
+                        ICommand command9=manager.getCommand(datosArray5[0]);
+                        String mensajeRetorno9=command9.execute(datos5, jugadorActual);
+                        String[] datosArray6=splitCommands(mensajeRetorno9);
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray6[1]));
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray6[2]));
+                        jugadorActual.getNumeros().add(Integer.parseInt(datosArray6[3]));
+                    break;
+                    case 13:
+                        Jugador atacante=null;
+                        Jugador atacado=null;
+                        String mensajeRetorno4="";
+                        for(int i=0; i<server.conexiones.size();i++){ 
+                            ThreadServidor current = server.conexiones.get(i);
+                            if(current.jugadorActual.isAtacante()){
+                                atacante=current.jugadorActual;
+                            }
+                            if(current.jugadorActual.isAtacado()){
+                                atacado=current.jugadorActual;
+                            }
+                        }
+                        ICommand command4=manager.getCommand("ATTACK");
+                        mensajeRetorno4+="Ataque ejecutado por: "+atacante.getNombreUsuario()+"\n";
+                        String numero="";
+                        for(int i=0;i<atacante.getNumeros().size();i++){
+                            numero+=atacante.getNumeros().get(i);
+                        }
+                        mensajeRetorno4+=command4.execute(numero,atacante);
+                        mensajeRetorno4+=command4.execute(numero,atacado);
+                        
+                    break;    
                     default:
                 }
             } catch (IOException ex) {

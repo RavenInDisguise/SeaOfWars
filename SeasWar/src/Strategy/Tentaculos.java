@@ -21,12 +21,13 @@ public class Tentaculos implements IAtacar {
             int irandom = rand.nextInt(20);
             int jrandom = rand.nextInt(30);
             if(jugadorActual.casillas[irandom][jrandom].porcentajeVida>0){
-                jugadorActual.casillas[irandom][jrandom].historialAtaques+="Casilla"+"["+irandom+"]"+"["+jrandom+"]:"+" tiene un tentáculo. Su porcentaje de vida de: "+jugadorActual.casillas[irandom][jrandom].porcentajeVida+" pasa a: 0.\n";
+                String datosCasilla="Casilla"+"["+irandom+"]"+"["+jrandom+"]:"+" tiene un tentáculo. Su porcentaje de vida de: "+jugadorActual.casillas[irandom][jrandom].porcentajeVida+" pasa a: 0.\n";
+                jugadorActual.casillas[irandom][jrandom].historialAtaques+=datosCasilla;
+                jugadorActual.setLogJugadorRecibido(datosCasilla);
                 jugadorActual.casillas[irandom][jrandom].porcentajeVida=0;
-                jugadorActual.casillas[irandom][jrandom].tentaculo=true;
-                jugadorActual.casillas[irandom][jrandom].ataqueReciente=true;
-                atacarRadio(irandom,jrandom,jugadorActual);
+                jugadorActual.casillas[irandom][jrandom].ataqueReciente=true; 
             }
+            atacarRadio(irandom,jrandom,jugadorActual);
         }
         
     } 
@@ -77,7 +78,6 @@ public class Tentaculos implements IAtacar {
                          jugadorActual.casillas[iRef][jRef].historialAtaques+=datosCasilla;
                          jugadorActual.setLogJugadorRecibido(datosCasilla);
                          jugadorActual.casillas[iRef][jRef].porcentajeVida=0;
-                         jugadorActual.casillas[iRef][jRef].tentaculo=true;
                          jugadorActual.casillas[iRef][jRef].ataqueReciente=true;
                          }
                      }

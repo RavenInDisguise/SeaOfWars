@@ -62,20 +62,23 @@ public class ThreadCliente extends Thread{
                         int vivas1=reader.readInt();
                         refPantalla.rellenarLabelsLuchadores(pos, nombreLuchador1, totales1, vivas1);
                     break;
-                    case 7:
+                    case 7: //Pintar matriz
                         int i=reader.readInt();
                         int j=reader.readInt();
                         String color=reader.readUTF();
                         refPantalla.pintarMatriz(i, j, color);
                     break;
-                    case 8: 
+                    case 8: //Mensajes
                         String remitente = reader.readUTF();
                         String mensajeRecibido = reader.readUTF();
                         refPantalla.addMensaje(remitente+": "+mensajeRecibido);
                     break;
-                    case 9:
+                    case 9: //Historial ataques
                         String historial=reader.readUTF();
                         refPantalla.addAtaque(historial);
+                    break;  
+                    case 10: 
+                        
                     break;    
                     default:
                 }
