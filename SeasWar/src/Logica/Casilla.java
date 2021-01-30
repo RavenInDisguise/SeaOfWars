@@ -20,6 +20,7 @@ public class Casilla {
     public int x;
     public int y;
     public boolean volcan=false;
+    public boolean remolino=false;
     public int radioVolcan=0;
     public boolean ataqueReciente=false;
 

@@ -5,13 +5,20 @@
  */
 package Logica;
 
+import Strategy.Cardumen;
 import Strategy.ControlKraken;
+import Strategy.EelAttack;
 import Strategy.IAtacar;
 import Strategy.KrakenBreath;
+import Strategy.PoseidonThunders;
+import Strategy.Pulp;
 import Strategy.ReleaseKraken;
+import Strategy.SharkAttack;
 import Strategy.Tentaculos;
+import Strategy.TermalRush;
 import Strategy.ThreeLines;
 import Strategy.ThreeNumbers;
+import Strategy.ThunderRain;
 import Strategy.VolcanoExplosion;
 import Strategy.VolcanoRaising;
 
@@ -119,10 +126,30 @@ public class Luchador{
             OUTER:
             switch (this.Grupo.toLowerCase()) {
                 case "thunders under the sea":
-
+                    switch (ataque) {
+                        case "THUNDER RAIN":
+                            iataque=new ThunderRain();
+                            break;
+                        case "POSEIDON THUNDERS":
+                            iataque=new PoseidonThunders();
+                            break;
+                        default: //EEL ATTACK
+                            iataque=new EelAttack();
+                            break;
+                        }
                     break;
                 case "fish telepathy":
-                    
+                    switch (ataque) {
+                        case "CARDUMEN":
+                            iataque=new Cardumen();
+                            break;
+                        case "SHARK ATTACK":
+                            iataque=new SharkAttack();
+                            break;
+                        default: //PULP
+                            iataque=new Pulp();
+                            break;
+                    }
                     break;
                 case "release the kraken":
                     switch (ataque) {
@@ -162,7 +189,7 @@ public class Luchador{
                             iataque=new VolcanoExplosion();
                             break;
                         case "TERMAL RUSH":
-                            //iataque=new ControlKraken();
+                            iataque=new TermalRush();
                         default:
                             break;
                     }

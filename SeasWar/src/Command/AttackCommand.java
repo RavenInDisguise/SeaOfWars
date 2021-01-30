@@ -5,7 +5,6 @@
  */
 package Command;
 
-import Strategy.Tentaculos;
 import Logica.Jugador;
 
 /**
