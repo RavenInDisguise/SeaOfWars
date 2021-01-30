@@ -13,21 +13,15 @@ import java.util.Random;
  *
  * @author monic
  */
-public class TermalRush implements IAtacar{
+public class RadioactiveRush implements IAtacar{
 
     @Override
     public void atacarCasillas(Jugador jugadorActual, String[] arrayComandos) {
-        /* se genera un sobrecalentamiento del agua alrededor de un radio de 5 
-        casillas del volcán. 
-        El calentamiento será entre 5 y 6 segundos, cada segundo equivale a 
-        porcentaje del radio del volcán de daño, es decir, 
-        si el volcán tiene 5 de daño, cada segundo que pasa dañará las casillas 
-        en 5%*/
         Random rand = new Random();
         for (int i = 0; i <20; i++){
             for (int j = 0; j <30; j++){ 
                 if(jugadorActual.casillas[i][j].volcan){
-                    int segundos=(int) Math.floor(Math.random()*(5-6+1)+6);
+                    int segundos=(int) Math.floor(Math.random()*(1-10+1)+10);
                     recorrerMatriz(i, j, segundos,jugadorActual);
                     
                 }
@@ -56,8 +50,8 @@ public class TermalRush implements IAtacar{
         for(int k=0; k<tiempo; k++){
             if(casilla.porcentajeVida>0){
                 int porcentajeActual = casilla.porcentajeVida;
-                casilla.porcentajeVida-=5;
-                String datosCasilla="Casilla"+"["+i+"]"+"["+j+"]:"+" fue afectada por un sobrecalentamiento de agua. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[i][j].porcentajeVida+".\n";
+                casilla.porcentajeVida-=10;
+                String datosCasilla="Casilla"+"["+i+"]"+"["+j+"]:"+" fue afectada por radioactividad de basura. Su porcentaje de vida de: "+porcentajeActual+" pasa a: "+jugadorActual.casillas[i][j].porcentajeVida+".\n";
                 casilla.historialAtaquesTotales+=datosCasilla;
                 casilla.historialAtaques=datosCasilla;
                 jugadorActual.setLogJugadorRecibido(datosCasilla);
@@ -66,4 +60,3 @@ public class TermalRush implements IAtacar{
         }
     }
 }
-

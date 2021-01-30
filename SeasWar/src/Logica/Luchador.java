@@ -12,8 +12,11 @@ import Strategy.IAtacar;
 import Strategy.KrakenBreath;
 import Strategy.PoseidonThunders;
 import Strategy.Pulp;
+import Strategy.RadioactiveRush;
 import Strategy.ReleaseKraken;
+import Strategy.SendHumanGarbage;
 import Strategy.SharkAttack;
+import Strategy.SwirlRaising;
 import Strategy.Tentaculos;
 import Strategy.TermalRush;
 import Strategy.ThreeLines;
@@ -155,8 +158,19 @@ public class Luchador{
                         default:
                     }
                 case "waves control":
+                    switch (ataque) {
+                        case "SWIRL RAISING":
+                            iataque=new SwirlRaising();
+                            break;
+                        case "SEND HUMAN GARBAGE":
+                            iataque=new SendHumanGarbage();
+                            break;
+                        case "RADIOACTIVE RUSH":
+                            iataque=new RadioactiveRush();
+                            break;
+                        default:
+                    }
 
-                    break;
                 case "the trident":
                     switch (ataque) {
                         case "THREE LINES":

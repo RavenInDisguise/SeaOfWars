@@ -22,7 +22,9 @@ public class Casilla {
     public int y;
     public boolean volcan=false;
     public boolean remolino=false;
+    public boolean radioactiva=false;
     public int radioVolcan=0;
+    public int radioRemolino=0;
     public boolean ataqueReciente=false;
 
     public Casilla(String historialAtaques, String color, Luchador luchadorRepresentado, JButton refBoton, int x, int y) {

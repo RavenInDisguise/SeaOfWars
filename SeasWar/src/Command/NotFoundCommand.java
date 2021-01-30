@@ -6,10 +6,6 @@
 package Command;
 
 import Logica.Jugador;
-import java.awt.TextArea;
-import java.io.OutputStream;
-import javax.swing.JTextArea;
-import seaswar.SeasWarPantalla;
 
 public class NotFoundCommand extends BaseCommand {       
     private static final String COMMAND_NAME = "NOT_FOUND";       

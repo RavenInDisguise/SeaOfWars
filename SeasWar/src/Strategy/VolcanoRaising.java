@@ -39,6 +39,7 @@ public class VolcanoRaising implements IAtacar{
                            jugadorActual.setLogJugadorRecibido(datosCasilla);
                            jugadorActual.casillas[i][j].porcentajeVida=0;
                            jugadorActual.casillas[i][j].volcan=true;
+                           jugadorActual.casillas[i][j].radioVolcan=radio;
                            jugadorActual.casillas[i][j].ataqueReciente=true;
                        }
                     }

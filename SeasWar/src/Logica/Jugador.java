@@ -22,6 +22,9 @@ public class Jugador {
     public boolean turno = false;
     public boolean atacante=false;
     public boolean atacado=false;
+    public boolean fuerza=false;
+    public boolean resistencia=false;
+    public boolean vivo=false;
     
     public Jugador(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;

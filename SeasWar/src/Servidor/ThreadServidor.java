@@ -188,8 +188,25 @@ class ThreadServidor extends Thread{
                             }
                         }
                     break;
-                    case 9: 
-                        
+                    case 9:
+                        String datos6=reader.readUTF();
+                        String mensajeRetorno5="";
+                        ICommand command5=manager.getCommand("SALTARTURNO"); 
+                        mensajeRetorno5=command5.execute(datos6, jugadorActual);
+                        turnoSiguiente();
+                        String siguiente2="";
+                        for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){ //Hace los turnos
+                            if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                                siguiente2=juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                            }
+                        }
+                        for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF(mensajeRetorno5);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF("Turno de ataque: "+siguiente2);
+                        }
                     break;
                     case 10:
                         String datos3=reader.readUTF();
@@ -292,8 +309,45 @@ class ThreadServidor extends Thread{
                         mensajeRetorno4+=command4.execute(numero,atacante);
                         mensajeRetorno4+=command4.execute(numero,atacado);
                         
-                    break;    
+                    break; 
+                    case 14:
+                        String datos8=reader.readUTF();
+                        String mensajeRetorno10="";
+                        ICommand command10=manager.getCommand("RENDIRSE"); 
+                        mensajeRetorno10=command10.execute(datos8, jugadorActual);
+                        for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                            ThreadServidor current = server.conexiones.get(i);
+                            current.writer.writeInt(4);
+                            current.writer.writeUTF(mensajeRetorno10);
+                        }
+                        for(int j=0; j<juegoActual.getJugadores().size();j++){
+                            if(juegoActual.getJugadores().get(j).getNombreUsuario().trim().toUpperCase().equals(jugadorActual.getNombreUsuario().trim().toUpperCase())){
+                                    juegoActual.getJugadores().remove(j);
+                            }
+                        }
+                     break;     
+                     case 15:
+                        String datos15=reader.readUTF();
+                        String[] datosArray15=splitCommands(datos15);
+                        ICommand command15=manager.getCommand(datosArray15[0].trim());  
+                        String mensajeRetorno15=command15.execute(datos15, jugadorActual);
+                        turnoSiguiente();
+                                String siguiente="";
+                                for(int i=0; i<juegoActual.getJugadoresTurnados().size();i++){ //Hace los turnos
+                                    if(juegoActual.getJugadoresTurnados().get(i).isTurno()){
+                                        siguiente=juegoActual.getJugadoresTurnados().get(i).getNombreUsuario();
+                                    }
+                                }
+                                for(int i=0; i<juegoActual.getJugadores().size();i++){ //Muestra los turnos
+                                    ThreadServidor current = server.conexiones.get(i);
+                                    current.writer.writeInt(4);
+                                    current.writer.writeUTF(mensajeRetorno15);
+                                    current.writer.writeInt(4);
+                                    current.writer.writeUTF("Turno de ataque: "+siguiente);
+                                }
+                     break;
                     default:
+                    
                 }
             } catch (IOException ex) {
                 
@@ -348,6 +402,7 @@ class ThreadServidor extends Thread{
             }
         }
         juegoActual.getJugadoresTurnados().get(0).turno = true;
+        juegoActual.contVivos = juegoActual.getJugadoresTurnados().size();
         return juegoActual.getJugadoresTurnados();
     }
     
