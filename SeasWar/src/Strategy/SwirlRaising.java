@@ -36,6 +36,7 @@ public class SwirlRaising implements IAtacar {
                            jugadorActual.setLogJugadorRecibido(datosCasilla);
                            jugadorActual.casillas[i][j].porcentajeVida=0;
                            jugadorActual.casillas[i][j].remolino=true;
+                           jugadorActual.casillas[i][j].radioRemolino=radio;
                            jugadorActual.casillas[i][j].ataqueReciente=true;
                        }
                     }

@@ -16,6 +16,7 @@ public class Juego {
     public ArrayList<Jugador> jugadoresTurnados=new ArrayList<Jugador>();
     private static Juego juego;
     public int contListos =0;
+    public int contVivos;
 
     private Juego() {
     }

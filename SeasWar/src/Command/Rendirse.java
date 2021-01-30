@@ -33,5 +33,4 @@ public class Rendirse implements ICommand{
         String[] datos=datostxt.split("-");
         return datos;
     }
-    
 }
