@@ -99,5 +99,7 @@ Todas las acciones deben ser realizadas mediante comandos de la consola. Es libr
 * Mostrar porcentajes de celdas: muestra en el mapa la vida de cada celda.
 * Pintar vivas: muestra en el mapa las celdas que están vivas de un color, de otro las muertas.
 
+https://img.shields.io/github/stars/RavenInDisguise/SeaOfWars.git?logoColor=yellow&style=for-the-badge
+https://img.shields.io/github/forks/RavenInDisguise/SeaOfWars.git?style=for-the-badge
 
 
