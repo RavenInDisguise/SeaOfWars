@@ -92,14 +92,14 @@ Todas las acciones deben ser realizadas mediante comandos de la consola. Es libr
 * MENSAJE-NOMBRE JUGADOR: enviar mensaje a un enemigo particular.
 * RENDIRSE: perder el juego.
 * CONSULTARCELDA: dada una celda se muestra el estado de esta: vida, estado, y la lista cronológica de todos los ataques recibidos.
-* : muestra un detalle de TODOS los eventos que han sucedido: ataques recididos, atauqes ejecutados.
+* LOG: muestra un detalle de TODOS los eventos que han sucedido: ataques recididos, atauqes ejecutados.
 * CARACTERISTICA: da cuántos ataques se han realizado y cuál es el porcentaje de éxito, cuántos atinaron, cuántos no.
-* Consultar enemigo: se muestra el estado del enemigo: porcentaje de vida, casillas de muertas del total.
+* CONSULTARENEMIGO: se muestra el estado del enemigo: porcentaje de vida, casillas de muertas del total.
 * Mostrar celdas ocupadas: muestra en el mapa las celdas ocupadas por volcanes, remolinos.
-* Mostrar porcentajes de celdas: muestra en el mapa la vida de cada celda.
-* Pintar vivas: muestra en el mapa las celdas que están vivas de un color, de otro las muertas.
+* PORCENTAJECELDAS: muestra en el mapa la vida de cada celda.
+* PINTARVIVAS: muestra en el mapa las celdas que están vivas de un color, de otro las muertas.
 
-https://img.shields.io/github/stars/RavenInDisguise/SeaOfWars.git?logoColor=yellow&style=for-the-badge
-https://img.shields.io/github/forks/RavenInDisguise/SeaOfWars.git?style=for-the-badge
+[Stars](https://img.shields.io/github/stars/RavenInDisguise/SeaOfWars.git?logoColor=yellow&style=for-the-badge) 
+[Forks](https://img.shields.io/github/forks/RavenInDisguise/SeaOfWars.git?style=for-the-badge)
 
 
