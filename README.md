@@ -99,7 +99,5 @@ Todas las acciones deben ser realizadas mediante comandos de la consola. Es libr
 * PORCENTAJECELDAS: muestra en el mapa la vida de cada celda.
 * PINTARVIVAS: muestra en el mapa las celdas que están vivas de un color, de otro las muertas.
 
-[Stars](https://img.shields.io/github/stars/RavenInDisguise/SeaOfWars.git?logoColor=yellow&style=for-the-badge) 
-[Forks](https://img.shields.io/github/forks/RavenInDisguise/SeaOfWars.git?style=for-the-badge)
 
 
