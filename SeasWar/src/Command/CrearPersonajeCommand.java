@@ -7,46 +7,52 @@ package Command;
 
 import Logica.Jugador;
 import Logica.Luchador;
-import java.awt.TextArea;
-import java.io.OutputStream;
-import java.util.Arrays;
-import javax.swing.JTextArea;
 
 public class CrearPersonajeCommand extends BaseCommand {       
-    public static final String COMMAN_NAME = "CREAR PERSONAJE";       
+    public static final String COMMAN_NAME = "CREARPERSONAJE";       
     
     
-    public void mostrarPantalla(JTextArea txtArea_Command){
-        txtArea_Command.append("Ingrese un nombre: \n"
-                                + "Ingrese un grupo entre (Manta Negra, Poseidon y Aquaman: \n"
-                                + "Ingrese el porcentaje que representa para la civilizacion: \n"
-                                + "Ingrese su porcentaje de poder: \n"
-                                + "Ingrese su porcentaje de resistencia: \n"
-                                + "Ingrese su porcentaje de sanidad: \n"
-                                + "Ingrese el url de su imagen: \n"
-                
-                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR * SIN ESPACIOS \n");
-    }
     @Override
-    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador) {      
-        String datosTxt=txtArea_Escribir.getText();
-        String[] datos= datosTxt.split("*");
-        
+    public String mostrarInstrucciones(){
+        String instrucciones="Ingrese un nombre:"
+                                + "Ingrese un grupo entre (Thunders under the sea, Fish telepathy, Release the kraken, Waves Control, The trident, Undersea volcanoes): \n"
+                                + "Ingrese el porcentaje que representa para la civilizacion:\n"
+                                + "Ingrese su porcentaje de poder:\n"
+                                + "Ingrese su porcentaje de resistencia:\n"
+                                + "Ingrese su porcentaje de sanidad:\n"
+                                + "Ingrese el url de su imagen:\n"
+                                + "TODO ESTO EN ORDEN Y DIVIDIDO POR - SIN ESPACIOS \n";
+     return instrucciones;
+    }
+    
+    @Override
+    public String execute(String datosText, Jugador jugador) {      
         /*
-        String nombreLuchador; 0
-        String Grupo; 1
-        int porcentajeCivilizacion; 2
-        int poderLuchador; 3
-        int resistenciaLuchador; 4
-        int SanidadLuchador; 5
+        String nombreLuchador; 1
+        String Grupo; 2
+        int porcentajeCivilizacion; 3
+        int poderLuchador; 4
+        int resistenciaLuchador; 5
+        int SanidadLuchador; 6
+        String rutaImagen; 7
         */
-        Luchador luchadorNuevo = new Luchador(datos[0],datos[1],Integer. parseInt(datos[2]),Integer. parseInt(datos[3]),Integer. parseInt(datos[4]),Integer. parseInt(datos[5]),datos[6]);
+        System.out.println(datosText);
+        String[] datos=splitCommands(datosText);
+        //datos[2].toLowerCase();
+        Luchador luchadorNuevo = new Luchador(datos[1].trim(),datos[2].trim() ,Integer. parseInt(datos[3].trim()),Integer. parseInt(datos[4].trim()),Integer. parseInt(datos[5].trim()),Integer. parseInt(datos[6].trim()),datos[7].trim());
         jugador.agregarLuchador(luchadorNuevo);
+        return "Luchador agregado exitosamente.";
     }       
     @Override           
     public String getCommandName() {           
         return COMMAN_NAME;   
     }   
+
+    @Override
+    public String[] splitCommands(String datostxt) {
+        String[] datos=datostxt.split("-");
+        return datos;
+    }
 
 }
 

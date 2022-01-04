@@ -5,6 +5,7 @@
  */
 package Servidor;
 
+import Logica.Juego;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,11 +21,14 @@ public class Servidor {
     public ArrayList<ThreadServidor> conexiones;
     private boolean running = true;
     private ServerSocket srv;
+    protected Juego juegoActual;
+    public boolean partidaIniciada = false;
 
     public Servidor(ServerForm refPantalla) {
         this.refPantalla = refPantalla;
-        conexiones = new ArrayList<ThreadServidor>();
+        this.conexiones = new ArrayList<ThreadServidor>();
         this.refPantalla.setSrv(this);
+        
     }
     
     public void stopserver(){
@@ -32,19 +36,25 @@ public class Servidor {
     }
     
     public void runServer() throws IOException{
-        
+        this.juegoActual = Juego.getSingletonInstance();
         int contador = 0;
         srv = new ServerSocket(35775);
         
         while(running){
-            refPantalla.addMensaje(".: Esperando conexiones");
-            Socket refSocket = srv.accept();
-            refPantalla.addMensaje(".: Conexion realizada: " + (++contador));
+            if (!partidaIniciada){ 
+                refPantalla.addMensaje(".: Esperando conexiones");
+                Socket refSocket = srv.accept();
+                refPantalla.addMensaje(".: Conexion realizada: " + (++contador));
             
-            // Thread
-            ThreadServidor newThread = new ThreadServidor(refSocket, this);
-            conexiones.add(newThread);
-            newThread.start();
+            
+                // Thread
+                ThreadServidor newThread = new ThreadServidor(refSocket, this, juegoActual);
+                conexiones.add(newThread);
+                newThread.start();
+            }else{
+                    // OutputStream socket para poder hacer un writer
+                    refPantalla.addMensaje(":Conexión denegada: partida iniciada.");
+                }
         }
     }
     

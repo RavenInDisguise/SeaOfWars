@@ -9,6 +9,7 @@ import Logica.Jugador;
 import java.awt.TextArea;
 import java.io.OutputStream;
 import javax.swing.JTextArea;
+import seaswar.SeasWarPantalla;
 
 public class ErrorCommand extends BaseCommand {       
     private static final String COMMAND_NAME = "ERROR";       
@@ -17,10 +18,24 @@ public class ErrorCommand extends BaseCommand {
     public String getCommandName() {           
         return COMMAND_NAME;   
     }       
-    
+   
     @Override
-    public void execute(JTextArea txtArea_Escribir, JTextArea txtArea_Command, Jugador jugador) {
-        txtArea_Command.append("El comando escrito presenta un error. Intente de nuevo."); //To change body of generated methods, choose Tools | Templates.
+    public String execute(String datos, Jugador jugador) {
+       String instrucciones="El comando escrito presenta un error. Intente de nuevo.";
+       return instrucciones;
     }
+
+    @Override
+    public String mostrarInstrucciones() {
+       String instrucciones="El comando se presenta cuando ocurre un error.";
+       return instrucciones;
+    }
+
+    @Override
+    public String[] splitCommands(String datostxt) {
+        String[] datos= datostxt.split("-");
+        return datos;
+    }
+    
 }
 

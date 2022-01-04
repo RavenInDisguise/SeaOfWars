@@ -14,6 +14,15 @@ public class CommandManager {
     
     private CommandManager() {           
         registCommand(CrearPersonajeCommand.COMMAN_NAME, CrearPersonajeCommand.class);
+        registCommand(AttackCommand.COMMAND_NAME, AttackCommand.class);
+        registCommand(MensajeCommand.COMMAN_NAME, MensajeCommand.class);
+        registCommand(ListoCommand.COMMAN_NAME, ListoCommand.class);
+        registCommand(EnviarNum.COMMAN_NAME, EnviarNum.class);
+        registCommand(Rendirse.COMMAND_NAME, Rendirse.class);
+        registCommand(SaltarTurno.COMMAND_NAME, SaltarTurno.class);
+        registCommand(CaracteristicaCommand.COMMAN_NAME, CaracteristicaCommand.class);
+        registCommand(ConsultarCelda.COMMAND_NAME, ConsultarCelda.class);
+        registCommand(LogCommand.COMMAND_NAME, LogCommand.class);
     }       
     
     public static synchronized CommandManager getIntance() {           
